@@ -1,0 +1,436 @@
+@charset "UTF-8"; /*한글 주석처리시 설정*/
+@mixin w100 {
+  width: 90%;
+  display: center;
+  margin-left: 20%;
+}
+@mixin cell-color {
+  background-color: #ebeef3;
+  font-size: 12px;
+}
+$background-gray: #ebeef3;
+$navy: #363a54;
+$white: #fff;
+$border: #c5cedb;
+$bgGreen: #00c0aa;
+$pointer: pointer;
+$main-table-border-h: 2px solid #0b436d;
+
+$font-stack: "SpoqaHanSans", sans-serif;
+
+/* Main Component - header, background */
+body {
+  background-color: $background-gray;
+  line-height: 1.3;
+  margin: 0;
+  padding: 0;
+  font: 400 13px $font-stack;
+  color: #4d5256;
+  word-break: break-word;
+  word-wrap: break-word;
+  font-weight: 1;
+  font-size: smaller;
+  .container {
+    margin-left: 200px;
+    max-width: 1200px;
+    padding: 20px;
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      .floatL {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        height: 100%;
+        padding: 19px 20px 21px 40px;
+        line-height: 13px;
+        margin-top: 0;
+
+        .notice {
+          padding: 1px 5px;
+          background-color: $navy;
+          -moz-border-radius: 3px;
+          -webkit-border-radius: 3px;
+          border-radius: 3px;
+          color: $white;
+          font-size: 11px;
+          margin-left: 40px;
+        }
+      }
+    }
+  }
+}
+/* MainComponent - form */
+.mainForm {
+  .mainH2 {
+    margin-top: 20px;
+    margin-left: 20%;
+    font-size: 24px;
+    font-weight: bold;
+    color: $navy;
+  }
+  .bgBox {
+    overflow: hidden;
+    padding: 16px 20px;
+    background-color: $white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    @include w100;
+    .formRadio {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+    }
+  }
+  /* MainTableComponent*/
+  .TableRow :nth-child(n) {
+    text-align: center;
+  }
+
+  .mainTable {
+    /* mainComponent Table */
+    @include w100;
+    .tablePage {
+      margin-top: 15px;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .table {
+      &.horizontal {
+        border-top: $main-table-border-h;
+        border-right: 0;
+        border-left: 0;
+        border-bottom: $main-table-border-h;
+      }
+      background-color: $white;
+      color: #444;
+
+      th {
+        border-bottom: 2px solid #0b436d;
+        text-align: center;
+        color: #30343b;
+        height: 40px;
+        border-bottom: 1px solid $border;
+        border-left: 1px solid #d2d6e0;
+        vertical-align: middle;
+      }
+
+      td {
+        height: 40px;
+        border-bottom: 1px solid $border;
+        border-left: 1px solid #d2d6e0;
+        vertical-align: middle;
+        border-bottom: 1px solid $border;
+        border-left: 1px solid #d2d6e0;
+
+        &:first-child {
+          border-left: none;
+        }
+      }
+    }
+  }
+}
+
+button {
+  padding-block: 1px;
+  padding-inline: 6px;
+}
+
+select {
+  height: 26px;
+  padding: 0 36px 0 12px;
+  border: 1px solid #cfd3de;
+  border-radius: 3px;
+  vertical-align: middle;
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: $pointer;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+caption,
+th {
+  text-align: left;
+  font-weight: normal;
+  word-break: break-word;
+}
+
+// td {
+//   text-align: left;
+//   font-weight: normal;
+//   word-break: break-word;
+//   display: table-cell;
+//   vertical-align: inherit;
+// }
+
+tbody {
+  display: table-row-group;
+}
+
+textarea {
+  vertical-align: middle;
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  border: none;
+}
+
+.contents .bgBox .btnRound {
+  padding: 4px 26px 5px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.RadioBtn:focus {
+  outline: none;
+}
+
+input[type="radio"]:not(:checked) + span {
+  border: 1px solid #ccc;
+}
+
+.bgBlue {
+  background-color: $navy;
+}
+.Button {
+  color: $white;
+  vertical-align: middle;
+  display: inline-block;
+  cursor: $pointer;
+  &:hover {
+    background-color: #778eea;
+  }
+}
+
+.bgGreen {
+  background-color: #00c0aa;
+}
+
+a.btns {
+  display: inline-block;
+  line-height: 28px;
+  color: $white;
+  vertical-align: middle;
+}
+
+.btn,
+.btns {
+  height: 28px;
+  margin-left: 5px;
+  padding: 0 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  color: $white;
+  font-size: 12px;
+}
+
+.dateControl {
+  input {
+    display: inline-block;
+    margin-left: 10px;
+    width: 140px;
+    vertical-align: middle;
+    background: $white no-repeat right 10px top 4px;
+    cursor: $pointer;
+
+    &[type="text"] {
+      width: 140px;
+    }
+  }
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+input {
+  width: 100%;
+  height: 26px;
+  padding: 3px 10px 4px;
+  border: 1px solid #cfd3de;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+tr {
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit;
+}
+
+/*  flexBox */
+#tableContainer {
+  display: flex;
+  flex: 500px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 750px;
+  padding: 0;
+  margin-left: 50px;
+  margin-top: 0;
+  border-top: #d2d6e0;
+  .subTable {
+    font-size: 12px;
+    border: 1px solid #bcc2c9;
+    font-size: 8px;
+    .TableHead {
+      @include cell-color;
+    }
+  }
+}
+
+.item1 {
+  flex-basis: 150px;
+  color: black;
+  font-size: 0.8;
+  font-weight: 500;
+  border-left: 1px solid #d2d6e0;
+  border-bottom: 1px solid $border;
+  background-color: #ebeef3;
+  text-align: center;
+}
+
+.item {
+  flex-basis: 500px;
+  font-size: 13px;
+  font-weight: 500;
+  border-left: 1px solid #d2d6e0;
+  border-bottom: 1px solid $border;
+  border-right: 1px solid #d2d6e0;
+  padding: 5px;
+}
+
+.item-top {
+  border-top: 1px solid #d2d6e0;
+}
+
+/* new Window */
+.popBackground {
+  background-color: white;
+  padding: 5px;
+  .popWrap {
+    height: 30px;
+    padding: 10px 50px 10px 20px;
+    background-color: $navy;
+    margin-bottom: 10px;
+    padding: 16px 20px;
+    .popTit {
+      text-align: left;
+      margin-top: 0;
+      font-size: 16px;
+      color: $white;
+    }
+  }
+  .popBtnWrap {
+    display: flex;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    margin-left: 350px;
+  }
+}
+
+.textArea {
+  width: 490px;
+  border: 1px solid #bcc2c9;
+}
+
+.th {
+  background-color: #ebeef3;
+}
+
+// .popWrap {
+//   padding: 16px 20px;
+// }
+
+.checkAllday {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+
+  .MuiSvgIcon-root {
+    width: 30px;
+    height: 20px;
+    margin-right: 5px;
+  }
+}
+
+.date-picker-container {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.listBox {
+  max-height: 350px;
+}
+
+/*textArea*/
+.selectedBox {
+  min-height: 35px;
+  text-align: center;
+  margin-top: auto;
+  .selected {
+    text-align: center;
+  }
+  .selectedNo {
+    font-size: 13px;
+    text-align: center;
+    width: 100px;
+    border-left: $border;
+  }
+}
+
+/*sideBar*/
+#sideBar {
+  .logo {
+    margin-left: 90px;
+    margin-bottom: 50px;
+  }
+  position: fixed;
+  margin-left: 0;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background: $white;
+  border-radius: 0 15px 15px 0;
+  width: 250px;
+  .sideBox {
+    display: flex;
+    height: 60px;
+    width: 200px;
+    vertical-align: center;
+    margin: auto;
+    &:hover {
+      background: $navy;
+      border-radius: 15px;
+      background-position: -60px center;
+      color: $white;
+      cursor: $pointer;
+    }
+  }
+  .btnTip {
+    height: auto;
+    margin-top: 10px;
+    margin-left: 80px;
+    padding: 1px 8px 2px;
+    border-radius: 3px;
+    background-color: rgb(54 58 84 / 70%);
+    font-size: 11px;
+    cursor: $pointer;
+    border: none;
+  }
+}
