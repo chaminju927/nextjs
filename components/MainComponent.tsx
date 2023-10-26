@@ -11,6 +11,7 @@ import NavComponent from "./NavComponent";
 import axios, { AxiosResponse } from "axios";
 import { applyDataType } from "../types/common";
 import MainTableComponent from "./MainTableComponent";
+import { searchData } from "@/api/workTrip";
 
 function MainComponent(): JSX.Element {
   //메인페이지 검색 후 가져온 데이터
@@ -22,7 +23,7 @@ function MainComponent(): JSX.Element {
   const [renderState, setRenderState] = useState<boolean>(false);
   const [noData, setNoData] = useState<string>("조회된 데이터가 없습니다.");
 
-  //useEffect(() => {}, []);
+  const searchWorkType2 = searchData(dateState1!, dateState2!);
 
   const searchWorkType: () => void = () => {
     axios
@@ -54,15 +55,7 @@ function MainComponent(): JSX.Element {
     console.log(dateState1);
     console.log(dateState2);
   };
-  // const href = "/modal";
-  // const router = useRouter();
-  // const openWindow = () => {
-  //   router.push(
-  //     href,
-  //     "modal",
-  //     "scrollbars, resizable, width=780, height=650, left=500,top=100"
-  //   );
-  // };
+
   // const selectValue = [
   //   { val: 1, name: "10개씩" },
   //   { val: 2, name: "20개씩" },
