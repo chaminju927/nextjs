@@ -114,7 +114,9 @@ function ModalTableComponent({
                 </TableRow>
               ))}
             </TableBody>
-          ) : null}
+          ) : (
+            <div />
+          )}
         </CustomTable>
       </TableContainer>
     </div>
