@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 //import { useMemo, useState } from "react";

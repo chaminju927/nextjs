@@ -11,7 +11,7 @@ import NavComponent from "./NavComponent";
 import axios, { AxiosResponse } from "axios";
 import { applyDataType } from "../types/common";
 import MainTableComponent from "./MainTableComponent";
-import { searchData } from "@/api/workTrip";
+import { searchData } from "@/api/axiosInstance";
 
 function MainComponent(): JSX.Element {
   //메인페이지 검색 후 가져온 데이터
@@ -23,30 +23,19 @@ function MainComponent(): JSX.Element {
   const [renderState, setRenderState] = useState<boolean>(false);
   const [noData, setNoData] = useState<string>("조회된 데이터가 없습니다.");
 
-  const searchWorkType2 = searchData(dateState1!, dateState2!);
-
-  const searchWorkType: () => void = () => {
-    axios
-      .get("http://localhost:8080/worktrip/list", {
-        params: {
-          startDate: dateState1,
-          endDate: dateState2,
-        },
-      })
-      .then((response: AxiosResponse) => {
-        console.log(response.data);
-        if (response.data.length === 0) {
-          setNoData("해당 기간 내 신청 건이 없습니다.");
-        } else {
-          setSearchedData(response.data);
-          setRenderState(true);
-          setNoData("");
-        }
-      })
-      .then((error) => {
-        console.log(error);
-      });
+  // axios.get 요청
+  const searchWorkType = () => {
+    const responseData: any = searchData(dateState1!, dateState2!);
+    console.log(responseData);
+    // if (responseData.length === 0) {
+    //   setNoData("해당 기간 내 신청 건이 없습니다");
+    // } else {
+    //   setSearchedData(responseData);
+    //   setRenderState(true);
+    //   setNoData("");
+    // }
   };
+
   const getDate1 = (dateValue: string) => {
     setDateState1(dateValue);
   };

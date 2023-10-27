@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { dataType } from "../types/common";
 import DeleteIcon from "@mui/icons-material/Delete";
