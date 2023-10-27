@@ -8,10 +8,9 @@ import ButtonComponent from "./ButtonComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import RadioBtnComponent from "./RadioBtnComponent";
 import NavComponent from "./NavComponent";
-import axios, { AxiosResponse } from "axios";
 import { applyDataType } from "../types/common";
 import MainTableComponent from "./MainTableComponent";
-import { searchData } from "@/api/axiosInstance";
+import { searchData } from "@/axios/axiosInstance";
 
 function MainComponent(): JSX.Element {
   //메인페이지 검색 후 가져온 데이터
@@ -24,17 +23,22 @@ function MainComponent(): JSX.Element {
   const [noData, setNoData] = useState<string>("조회된 데이터가 없습니다.");
 
   // axios.get 요청
-  const searchWorkType = () => {
-    const responseData: any = searchData(dateState1!, dateState2!);
+  const searchWorkType = async () => {
+    const responseData: any = await searchData(dateState1!, dateState2!);
     console.log(responseData);
-    // if (responseData.length === 0) {
-    //   setNoData("해당 기간 내 신청 건이 없습니다");
-    // } else {
-    //   setSearchedData(responseData);
-    //   setRenderState(true);
-    //   setNoData("");
-    // }
+    if (responseData.state !== "fulfilled") {
+      setNoData("해당 기간 내 신청 건이 없습니다");
+    } else {
+      setSearchedData(responseData);
+      setRenderState(true);
+      setNoData("");
+      console.log(searchedData);
+    }
   };
+
+  useEffect(() => {
+    console.log(searchedData);
+  }, [searchedData]);
 
   const getDate1 = (dateValue: string) => {
     setDateState1(dateValue);

@@ -9,7 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { SetStateAction, useEffect, Dispatch } from "react";
 import Table from "@mui/material/Table";
-import { deleteData } from "@/api/axiosInstance";
+import { deleteData } from "@/axios/axiosInstance";
 
 function MainTableComponent({
   renderState,

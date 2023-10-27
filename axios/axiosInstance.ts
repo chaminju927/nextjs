@@ -6,6 +6,7 @@ export const axiosInstance = Axios.create({
 });
 
 // main component
+
 export const searchData: any = async (startDate: string, endDate: string) => {
   try {
     const response: AxiosResponse = await axiosInstance.get("/list", {

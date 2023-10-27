@@ -43,18 +43,20 @@ function ButtonComponent({
   if (btnName === "선택") {
     return (
       <div>
-        <ThemeProvider theme={mainTheme}>
-          <Button
-            className="Button"
-            size="medium"
-            color="primary"
-            variant="outlined"
-            startIcon={icon}
-            onClick={searchTable}
-          >
-            {btnName}
-          </Button>
-        </ThemeProvider>
+        <Button
+          className="Button"
+          size="medium"
+          variant="outlined"
+          startIcon={icon}
+          onClick={searchTable}
+          sx={{
+            backgroundColor: "white",
+            color: "gray",
+            border: "1px solid gray",
+          }}
+        >
+          {btnName}
+        </Button>
       </div>
     );
   } else if (btnName === "출장신청") {

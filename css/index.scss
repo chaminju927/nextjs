@@ -201,12 +201,13 @@ input[type="radio"]:not(:checked) + span {
   background-color: $navy;
 }
 .Button {
-  color: $white;
+  // color: $white;
   vertical-align: middle;
   display: inline-block;
   cursor: $pointer;
   &:hover {
     background-color: #778eea;
+    color: $white;
   }
 }
 
@@ -410,6 +411,9 @@ tr {
   border-radius: 0 15px 15px 0;
   width: 250px;
   .sideBox {
+    text-decoration: "none";
+    text-decoration-color: $navy;
+
     display: flex;
     height: 60px;
     width: 200px;

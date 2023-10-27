@@ -23,11 +23,11 @@ function SelectBoxComponent({
 
   return (
     <div>
-      {/* <select id="selectView" onChange={inputType}>
+      <select id="selectView" onChange={inputType}>
         {selectValue.map((el) => {
-          return <option value={el.name}>{el.name}</option>;
+          return <option key={el.name}>{el.name}</option>;
         })}
-      </select> */}
+      </select>
     </div>
   );
 }

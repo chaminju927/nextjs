@@ -12,7 +12,7 @@ import SelectBoxComponent from "../../components/SelectBoxComponent";
 import CheckIcon from "@mui/icons-material/Check";
 import Typography from "@mui/material/Typography";
 import { dataType, applyDataType } from "../../types/common";
-import { postData } from "@/api/axiosInstance";
+import { postData } from "@/axios/axiosInstance";
 
 function ModalComponent(): JSX.Element {
   const [selectedData, setSelectedData] = useState<dataType>(); //결재자 선택

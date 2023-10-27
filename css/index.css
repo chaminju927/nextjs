@@ -174,13 +174,13 @@ input[type=radio]:not(:checked) + span {
 }
 
 .Button {
-  color: #fff;
   vertical-align: middle;
   display: inline-block;
   cursor: pointer;
 }
 .Button:hover {
   background-color: #778eea;
+  color: #fff;
 }
 
 .bgGreen {
@@ -357,6 +357,7 @@ tr {
 
 /*sideBar*/
 #sideBar {
+  color: #363a54;
   position: fixed;
   margin-left: 0;
   top: 0;
@@ -372,6 +373,9 @@ tr {
   margin-bottom: 50px;
 }
 #sideBar .sideBox {
+  -webkit-text-decoration: "none";
+          text-decoration: "none";
+  text-decoration-color: #363a54;
   display: flex;
   height: 60px;
   width: 200px;
