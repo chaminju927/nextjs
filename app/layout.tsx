@@ -7,12 +7,12 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
+  children, //page.tsx 에서 가져온 자식노드
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html>
       <body>{children}</body>
     </html>
   );

@@ -4,10 +4,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DateInputComponent from "./DateInputComponent";
 import ButtonComponent from "./ButtonComponent";
-//import SelectBoxComponent from "./SelectBoxComponent";
 import SearchIcon from "@mui/icons-material/Search";
 import RadioBtnComponent from "./RadioBtnComponent";
-import NavComponent from "./NavComponent";
+import NavComponent from "./NavBarComponent";
 import { applyDataType } from "../types/common";
 import MainTableComponent from "./MainTableComponent";
 import { searchData } from "@/axios/axiosInstance";
@@ -24,9 +23,12 @@ function MainComponent(): JSX.Element {
 
   // axios.get 요청
   const searchWorkType = async () => {
-    const responseData: any = await searchData(dateState1!, dateState2!);
+    const responseData: applyDataType[] = await searchData(
+      dateState1!,
+      dateState2!
+    );
     console.log(responseData);
-    if (responseData.state !== "fulfilled") {
+    if (responseData.length == 0) {
       setNoData("해당 기간 내 신청 건이 없습니다");
     } else {
       setSearchedData(responseData);
@@ -73,42 +75,44 @@ function MainComponent(): JSX.Element {
         <form className="mainForm">
           <h2 className="mainH2">출장관리</h2>
           <table className="tableWrap bgBox">
-            <tr>
-              <td>
-                <div className="formRadio">
-                  <RadioBtnComponent />
-                </div>
-              </td>
-              <td>
-                <div className="dateControl">
-                  <div>
-                    <DateInputComponent getStartDate={getDate1} />
+            <thead>
+              <tr>
+                <td>
+                  <div className="formRadio">
+                    <RadioBtnComponent />
                   </div>
-                  &nbsp;~
-                  <div>
-                    <DateInputComponent getEndDate={getDate2} />
+                </td>
+                <td>
+                  <div className="dateControl">
+                    <div>
+                      <DateInputComponent getStartDate={getDate1} />
+                    </div>
+                    &nbsp;~
+                    <div>
+                      <DateInputComponent getEndDate={getDate2} />
+                    </div>
+                    <ButtonComponent
+                      btnName="검색"
+                      icon={<SearchIcon sx={{ width: 20 }} />}
+                      search={searchWorkType}
+                    />
                   </div>
-                  <ButtonComponent
-                    btnName="검색"
-                    icon={<SearchIcon sx={{ width: 20 }} />}
-                    search={searchWorkType}
-                  />
-                </div>
-              </td>
-              <td>
-                <div
-                  onClick={() => {
-                    window.open(
-                      "/modal",
-                      "modal",
-                      "scrollbars=yes,resizable=no, width=780, height=650, left=500,top=100"
-                    );
-                  }}
-                >
-                  <ButtonComponent btnName="출장신청" />
-                </div>
-              </td>
-            </tr>
+                </td>
+                <td>
+                  <div
+                    onClick={() => {
+                      window.open(
+                        "/modal",
+                        "modal",
+                        "scrollbars=yes,resizable=no, width=780, height=650, left=500,top=100"
+                      );
+                    }}
+                  >
+                    <ButtonComponent btnName="출장신청" />
+                  </div>
+                </td>
+              </tr>
+            </thead>
           </table>
 
           <div className="mainTable">

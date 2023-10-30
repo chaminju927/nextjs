@@ -18,24 +18,22 @@ import { createTheme, ThemeProvider } from "@mui/material";
 import Page from "../app/calendar/page";
 
 function NavComponent(): JSX.Element {
-  //const navigate = useNavigate();
   const clicked = (e: React.MouseEvent): void => {
     var path = e.currentTarget.id;
     console.log(path);
-    //avigate(`/${path}`);
   };
 
   return (
     <div>
       <nav id="sideBar">
         <h1 className="logo">
-          {/* <Image
-            // className="logo"
+          <Image
+            //className="logo"
             src="/public/images/logo.png"
             width={80}
             height={80}
-            alt=""
-          /> */}
+            alt="logo"
+          />
         </h1>
         <div className="lnb">
           <Link

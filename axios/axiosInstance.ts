@@ -1,4 +1,4 @@
-import Axios, { AxiosResponse } from "axios";
+import Axios, { AxiosPromise, AxiosResponse } from "axios";
 import { applyDataType } from "@/types/common";
 
 export const axiosInstance = Axios.create({
@@ -6,10 +6,12 @@ export const axiosInstance = Axios.create({
 });
 
 // main component
-
-export const searchData: any = async (startDate: string, endDate: string) => {
+export const searchData: <T>( // T = applyDataType[]
+  startDate: string,
+  endDate: string //위에서 정한 제네릭은 async문 안에서는 적용이 안되므로 파라미터 앞에서 재정의 해줘야 함
+) => Promise<T> = async <T>(startDate: string, endDate: string) => {
   try {
-    const response: AxiosResponse = await axiosInstance.get("/list", {
+    const response: AxiosResponse<T> = await axiosInstance.get<T>("/list", {
       params: {
         startDate: startDate,
         endDate: endDate,
@@ -18,21 +20,37 @@ export const searchData: any = async (startDate: string, endDate: string) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error as T;
   }
 };
 
 // maintable component
-export const deleteData: any = async (deleteNo: number) => {
+export const deleteData: (deleteNo: number) => Promise<string> = async (
+  deleteNo: number
+) => {
   try {
-    const response: AxiosResponse = await axiosInstance.delete(`/${deleteNo}`);
+    const response: AxiosResponse<string> = await axiosInstance.delete(
+      `/${deleteNo}`
+    );
     return response.data;
   } catch (error) {
     console.log(error);
+    return "error";
   }
 };
 
 // modal component
-export const postData: any = async ({
+export const postData: ({
+  workType,
+  startDate,
+  endDate,
+  reason,
+  confirm,
+  workerNo,
+  part,
+  name,
+  position,
+}: applyDataType) => Promise<string> = async ({
   workType,
   startDate,
   endDate,
@@ -58,5 +76,6 @@ export const postData: any = async ({
     return response.data;
   } catch (error) {
     console.log(error);
+    return "error";
   }
 };

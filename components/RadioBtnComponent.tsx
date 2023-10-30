@@ -1,5 +1,3 @@
-"use client";
-
 import Radio, { RadioProps } from "@mui/material/Radio";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { RadioGroup } from "@mui/material";

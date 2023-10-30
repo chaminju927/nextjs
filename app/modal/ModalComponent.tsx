@@ -15,6 +15,7 @@ import { dataType, applyDataType } from "../../types/common";
 import { postData } from "@/axios/axiosInstance";
 
 function ModalComponent(): JSX.Element {
+  const [element, setElement] = useState<boolean>(false!); //hydration error 해결
   const [selectedData, setSelectedData] = useState<dataType>(); //결재자 선택
   const [selectedData2, setSelectedData2] = useState<dataType>(); //참조자 선택
   const [applyData, setApplyData] = useState<applyDataType>({
@@ -30,8 +31,8 @@ function ModalComponent(): JSX.Element {
   }); //post요청시 보내는 데이터
 
   useEffect(() => {
-    console.log(applyData);
-  }, [applyData]);
+    setElement(true);
+  }, []);
 
   const selectValue = [
     { val: 1, name: "[국내]시스템패치" },
@@ -93,132 +94,139 @@ function ModalComponent(): JSX.Element {
     setApplyData({ ...applyData, reason: inputText });
   };
 
-  return (
-    <div className="popBackground">
-      <form name="frm">
-        <div className="popWrap">
-          <h4 className="popTit">출장 신청 정보</h4>
-        </div>
-        <section>
-          <div id="tableContainer">
-            <div className="item1 item-top">
-              <p>출장명</p>
-            </div>
-            <div className="item item-top">
-              <SelectBoxComponent
-                selectValue={selectValue}
-                getTypeFunction={getType}
-              />
-            </div>
+  if (element) {
+    return (
+      <div className="popBackground">
+        <form name="frm">
+          <div className="popWrap">
+            <h4 className="popTit">출장 신청 정보</h4>
           </div>
-          <div id="tableContainer">
-            <div className="item1">
-              <p>신청일</p>
-            </div>
-            <div className="item dateContainer">
-              <div className="dateControl">
-                <div className="dateContainer">
-                  <DateInputComponent applyStartDate={applyDateFunction1} />
-                </div>
-                ~
-                <div className="dateContainer">
-                  <DateInputComponent applyEndDate={applyDateFunction2} />
-                </div>
-                <div className="checkAllday dateContainer">
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          defaultChecked
-                          size="small"
-                          sx={{
-                            "&.Mui-checked": {
-                              color: "#00c0aa",
-                            },
-                          }}
-                        />
-                      }
-                      label={
-                        <Typography sx={{ fontSize: 13 }}>종일 일정</Typography>
-                      }
-                    />
-                  </FormGroup>
-                </div>
+          <section>
+            <div id="tableContainer">
+              <div className="item1 item-top">
+                <p>출장명</p>
               </div>
-            </div>
-          </div>
-          <div id="tableContainer">
-            <div className="item1">
-              <p className="infoTag">신청 사유</p>
-            </div>
-            <div className="item">
-              <TextAreaComponent
-                content="신청사유를 입력하세요"
-                getReason={applyReason}
-              />
-            </div>
-          </div>
-
-          <div id="tableContainer">
-            <div className="item1">
-              <p>결재자 목록</p>
-            </div>
-            <div className="item">
-              <ModalTableComponent
-                selectedType="결재자"
-                propFunction={sendData}
-              />
-            </div>
-          </div>
-
-          <div id="tableContainer">
-            <div className="item1">
-              <p>결재자 선택</p>
-            </div>
-            <div className="item">
-              <TextAreaComponent
-                content="결재자를 선택해주세요."
-                selectedData={selectedData}
-                getReason={function (inputText: string): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
-            </div>
-          </div>
-          {/* <div id="tableContainer" className="listBox">
-            <div className="item1">
-              <p>참조자 목록</p>
-            </div>
-            <div className="item">
-              <ModalTableComponent
-                selectedType="참조자"
-                propFunction={sendData2}
-              />
-            </div>
-          </div> */}
-          {/* <div id="tableContainer">
-            <div className="item1">
-              <p>참조자 선택</p>
-            </div>
-            <div className="item">
-              <div className="selectBox">
-                <TextAreaComponent
-                  content="추가된 데이터가 없습니다."
-                  selectedData={selectedData2}
+              <div className="item item-top">
+                <SelectBoxComponent
+                  selectValue={selectValue}
+                  getTypeFunction={getType}
                 />
               </div>
             </div>
-          </div> */}
-        </section>
+            <div id="tableContainer">
+              <div className="item1">
+                <p>신청일</p>
+              </div>
+              <div className="item dateContainer">
+                <div className="dateControl">
+                  <div className="dateContainer">
+                    <DateInputComponent applyStartDate={applyDateFunction1} />
+                  </div>
+                  ~
+                  <div className="dateContainer">
+                    <DateInputComponent applyEndDate={applyDateFunction2} />
+                  </div>
+                  <div className="checkAllday dateContainer">
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            defaultChecked
+                            size="small"
+                            sx={{
+                              "&.Mui-checked": {
+                                color: "#00c0aa",
+                              },
+                            }}
+                          />
+                        }
+                        label={
+                          <Typography sx={{ fontSize: 13 }}>
+                            종일 일정
+                          </Typography>
+                        }
+                      />
+                    </FormGroup>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="tableContainer">
+              <div className="item1">
+                <p className="infoTag">신청 사유</p>
+              </div>
+              <div className="item">
+                <TextAreaComponent
+                  content="신청사유를 입력하세요"
+                  getReason={applyReason}
+                />
+              </div>
+            </div>
 
-        <div className="popBtnWrap" onClick={closeModal}>
-          <ButtonComponent
-            btnName="신청"
-            icon={<CheckIcon sx={{ width: 20, marginRight: 0 }} />}
-          />
-        </div>
-      </form>
-    </div>
-  );
+            <div id="tableContainer">
+              <div className="item1">
+                <p>결재자 목록</p>
+              </div>
+              <div className="item">
+                <ModalTableComponent
+                  selectedType="결재자"
+                  propFunction={sendData}
+                />
+              </div>
+            </div>
+
+            <div id="tableContainer">
+              <div className="item1">
+                <p>결재자 선택</p>
+              </div>
+              <div className="item">
+                <TextAreaComponent
+                  content="결재자를 선택해주세요."
+                  selectedData={selectedData}
+                  getReason={function (inputText: string): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
+              </div>
+            </div>
+            {/* <div id="tableContainer" className="listBox">
+                <div className="item1">
+                  <p>참조자 목록</p>
+                </div>
+                <div className="item">
+                  <ModalTableComponent
+                    selectedType="참조자"
+                    propFunction={sendData2}
+                  />
+                </div>
+              </div> */}
+            {/* <div id="tableContainer">
+                <div className="item1">
+                  <p>참조자 선택</p>
+                </div>
+                <div className="item">
+                  <div className="selectBox">
+                    <TextAreaComponent
+                      content="추가된 데이터가 없습니다."
+                      selectedData={selectedData2}
+                    />
+                  </div>
+                </div>
+              </div> */}
+          </section>
+
+          <div className="popBtnWrap" onClick={closeModal}>
+            <ButtonComponent
+              btnName="신청"
+              icon={<CheckIcon sx={{ width: 20, marginRight: 0 }} />}
+            />
+          </div>
+        </form>
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 }
+
 export default ModalComponent;
