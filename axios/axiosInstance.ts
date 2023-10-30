@@ -1,5 +1,6 @@
-import Axios, { AxiosPromise, AxiosResponse } from "axios";
+import Axios, { AxiosError, AxiosPromise, AxiosResponse } from "axios";
 import { applyDataType } from "@/types/common";
+import Error from "next/error";
 
 export const axiosInstance = Axios.create({
   baseURL: "http://localhost:8080/worktrip",
@@ -62,7 +63,7 @@ export const postData: ({
   position,
 }: applyDataType) => {
   try {
-    const response: AxiosResponse = await axiosInstance.post("/", {
+    const response: AxiosResponse<string> = await axiosInstance.post("/", {
       workType: workType,
       startDate: startDate,
       endDate: endDate,
