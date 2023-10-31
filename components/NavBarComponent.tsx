@@ -14,8 +14,6 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { createTheme, ThemeProvider } from "@mui/material";
-import Page from "../app/calendar/page";
 
 function NavComponent(): JSX.Element {
   const clicked = (e: React.MouseEvent): void => {
@@ -27,13 +25,13 @@ function NavComponent(): JSX.Element {
     <div>
       <nav id="sideBar">
         <h1 className="logo">
-          <Image
+          {/* <Image
             //className="logo"
             src="/public/images/logo.png"
             width={80}
             height={80}
             alt="logo"
-          />
+          /> */}
         </h1>
         <div className="lnb">
           <Link

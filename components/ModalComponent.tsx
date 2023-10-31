@@ -4,18 +4,18 @@ import React, { useEffect, useState } from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import ModalTableComponent from "../../components/ModalTableComponent";
-import DateInputComponent from "../../components/DateInputComponent";
-import ButtonComponent from "../../components/ButtonComponent";
-import TextAreaComponent from "../../components/TextAreaComponent";
-import SelectBoxComponent from "../../components/SelectBoxComponent";
+import ModalTableComponent from "./ModalTableComponent";
+import DateInputComponent from "./DateInputComponent";
+import ButtonComponent from "./ButtonComponent";
+import TextAreaComponent from "./TextAreaComponent";
+import SelectBoxComponent from "./SelectBoxComponent";
 import CheckIcon from "@mui/icons-material/Check";
 import Typography from "@mui/material/Typography";
-import { dataType, applyDataType } from "../../types/common";
+import { dataType, applyDataType } from "../types/common";
 import { postData } from "@/axios/axiosInstance";
 
 function ModalComponent(): JSX.Element {
-  const [element, setElement] = useState<boolean>(false!); //hydration error 해결
+  const [element, setElement] = useState<boolean>(false!);
   const [selectedData, setSelectedData] = useState<dataType>(); //결재자 선택
   const [selectedData2, setSelectedData2] = useState<dataType>(); //참조자 선택
   const [applyData, setApplyData] = useState<applyDataType>({
@@ -31,7 +31,7 @@ function ModalComponent(): JSX.Element {
   }); //post요청시 보내는 데이터
 
   useEffect(() => {
-    setElement(true);
+    setElement(true); // mount이후 렌더링=> hydration error방지
   }, []);
 
   const selectValue = [

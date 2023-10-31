@@ -36,18 +36,20 @@ function TextAreaComponent({
     return (
       <div>
         <table className="textArea selectedBox">
-          {tableData.map((data, index) => (
-            <tr key={index}>
-              <td className="TableHead selectedNo">{index + 1}차</td>
+          <thead>
+            {tableData.map((data, index) => (
+              <tr key={index}>
+                <td className="TableHead selectedNo">{index + 1}차</td>
 
-              <td colSpan={4} className="selected">
-                {data.part} {data.name} {data.position}
-                <IconButton onClick={deleteBtn}>
-                  <DeleteIcon sx={{ width: 16, marginRight: 0 }} />
-                </IconButton>
-              </td>
-            </tr>
-          ))}
+                <td colSpan={4} className="selected">
+                  {data.part} {data.name} {data.position}
+                  <IconButton onClick={deleteBtn}>
+                    <DeleteIcon sx={{ width: 16, marginRight: 0 }} />
+                  </IconButton>
+                </td>
+              </tr>
+            ))}
+          </thead>
         </table>
       </div>
     );

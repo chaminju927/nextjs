@@ -15,4 +15,6 @@ export type applyType = {
   no?: number;
 };
 
+export type queryType = [startDate: string, endDate: string];
+
 export type applyDataType = dataType & applyType;

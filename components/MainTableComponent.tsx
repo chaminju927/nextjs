@@ -10,6 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import { SetStateAction, useEffect, Dispatch } from "react";
 import Table from "@mui/material/Table";
 import { deleteData } from "@/axios/axiosInstance";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 
 function MainTableComponent({
   renderState,
@@ -30,14 +32,23 @@ function MainTableComponent({
     console.log(noData);
   }, [searchedData, renderState, noData]);
 
+  const [deleteNo, setDeleteNo] = useState<number>();
+
+  const mutation = useMutation({
+    mutationFn: deleteData,
+    onSuccess: (data) => {
+      console.log(data);
+    },
+  });
+
   const deleteReq = (no: number) => {
-    const deleteNo = no;
-    deleteData(deleteNo!);
+    setDeleteNo(no);
+    // deleteData(no);
+    mutation.mutate(no);
     if (searchedData.length === 1) {
-      setNoData("해당 기간 내 신청 건이 없습니다");
+      setNoData("해당 기간 내 신청 건이 없습니다.");
     } else {
       const reRender = searchedData.filter((el) => {
-        // console.log(el);
         return el.no !== deleteNo;
       });
       setSearchedData(reRender);

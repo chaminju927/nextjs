@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import DateInputComponent from "./DateInputComponent";
 import ButtonComponent from "./ButtonComponent";
@@ -10,6 +9,7 @@ import NavComponent from "./NavBarComponent";
 import { applyDataType } from "../types/common";
 import MainTableComponent from "./MainTableComponent";
 import { searchData } from "@/axios/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
 
 function MainComponent(): JSX.Element {
   //메인페이지 검색 후 가져온 데이터
@@ -20,21 +20,28 @@ function MainComponent(): JSX.Element {
   // 메인 테이블에 보낼 state
   const [renderState, setRenderState] = useState<boolean>(false);
   const [noData, setNoData] = useState<string>("조회된 데이터가 없습니다.");
+  const [clicked, setClicked] = useState<boolean>(false);
 
-  // axios.get 요청
-  const searchWorkType = async () => {
-    const responseData: applyDataType[] = await searchData(
-      dateState1!,
-      dateState2!
-    );
-    console.log(responseData);
-    if (responseData.length == 0) {
-      setNoData("해당 기간 내 신청 건이 없습니다");
-    } else {
-      setSearchedData(responseData);
+  // useEffect(() => {}, []);
+
+  const { data, error } = useQuery({
+    queryKey: [dateState1!, dateState2!],
+    queryFn: () => searchData(dateState1!, dateState2!),
+    enabled: clicked,
+  });
+  //axios.get 요청
+  const searchWorkType = () => {
+    setClicked(true);
+    console.log(data);
+    if (error) {
+      console.log(error);
+    } else if (data!.length == 0) {
+      setNoData("해당 기간 내 신청 건이 없습니다.");
+    } else if (data!) {
+      console.log(data);
+      setSearchedData(data);
       setRenderState(true);
       setNoData("");
-      console.log(searchedData);
     }
   };
 
