@@ -22,7 +22,7 @@ function MainTableComponent({
 }: {
   renderState: boolean;
   searchedData: applyDataType[];
-  noData?: string;
+  noData: string;
   setNoData: Dispatch<SetStateAction<string>>;
   setSearchedData: Dispatch<SetStateAction<applyDataType[]>>;
 }): JSX.Element {
@@ -35,19 +35,19 @@ function MainTableComponent({
   const [deleteNo, setDeleteNo] = useState<number>();
 
   const mutation = useMutation({
+    //useMutation은 자동실행안되므로 disable필요X
     mutationFn: deleteData,
-    onSuccess: (data) => {
-      console.log(data);
+    onError: (error) => {
+      console.log(error);
     },
   });
 
   const deleteReq = (no: number) => {
     setDeleteNo(no);
-    // deleteData(no);
     mutation.mutate(no);
     if (searchedData.length === 1) {
       setNoData("해당 기간 내 신청 건이 없습니다.");
-    } else {
+    } else if (mutation.isSuccess) {
       const reRender = searchedData.filter((el) => {
         return el.no !== deleteNo;
       });

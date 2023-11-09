@@ -13,6 +13,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import Typography from "@mui/material/Typography";
 import { dataType, applyDataType } from "../types/common";
 import { postData } from "@/axios/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
 
 function ModalComponent(): JSX.Element {
   const [element, setElement] = useState<boolean>(false!);
@@ -29,6 +30,7 @@ function ModalComponent(): JSX.Element {
     name: "",
     position: "",
   }); //post요청시 보내는 데이터
+  const [clicked, setClicked] = useState<boolean>(false);
 
   useEffect(() => {
     setElement(true); // mount이후 렌더링=> hydration error방지
@@ -41,22 +43,23 @@ function ModalComponent(): JSX.Element {
     { val: 4, name: "[국내]정기점검" },
   ];
 
-  // axios.post 요청
+  const { data, error } = useQuery({
+    queryKey: [applyData],
+    queryFn: () => postData(applyData),
+    //enabled: clicked,
+  });
+
+  // post 요청
   const closeModal: (e: React.MouseEvent) => void = () => {
-    window.close();
-    postData({
-      workType: applyData.workType,
-      startDate: applyData.startDate,
-      endDate: applyData.endDate,
-      reason: applyData.reason,
-      confirm: applyData.confirm,
-      workerNo: applyData.workerNo,
-      part: applyData.part,
-      name: applyData.name,
-      position: applyData.position,
-    });
+    setClicked(true);
+    console.log(data);
+    if (error) {
+      console.log(error);
+    } else {
+      window.close();
+    }
   };
-  // 결재자 선택 콜백
+  // 결재자 선택
   const sendData = (data: dataType) => {
     setSelectedData(data);
     setApplyData({

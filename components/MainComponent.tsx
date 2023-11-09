@@ -24,24 +24,24 @@ function MainComponent(): JSX.Element {
 
   // useEffect(() => {}, []);
 
-  const { data, error } = useQuery({
+  const { data, error, isSuccess } = useQuery({
     queryKey: [dateState1!, dateState2!],
     queryFn: () => searchData(dateState1!, dateState2!),
-    enabled: clicked,
+    //enabled: clicked,
+    //retryOnMount: false,  // false면 에러 있을시 마운트에 쿼리 재시도X
   });
   //axios.get 요청
   const searchWorkType = () => {
     setClicked(true);
-    console.log(data);
     if (error) {
       console.log(error);
-    } else if (data!.length == 0) {
-      setNoData("해당 기간 내 신청 건이 없습니다.");
-    } else if (data!) {
-      console.log(data);
-      setSearchedData(data);
+    } else if (isSuccess) {
+      console.log(data!);
+      setSearchedData(data!);
       setRenderState(true);
       setNoData("");
+    } else if (isSuccess && searchedData.length == 0) {
+      setNoData("해당 기간 내 신청 건이 없습니다.");
     }
   };
 

@@ -3,7 +3,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PropsWithChildren, useState } from "react";
 
-export default function Providers({ children }: PropsWithChildren) {
+export default function Providers({
+  children,
+}: PropsWithChildren): JSX.Element {
   const [queryClient] = useState(() => new QueryClient());
 
   return (

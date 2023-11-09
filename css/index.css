@@ -399,4 +399,213 @@ tr {
   font-size: 11px;
   cursor: pointer;
   border: none;
+}
+
+.calendar_top {
+  text-align: center;
+}
+.calendar_top .Month {
+  font-size: 25px;
+}
+.calendar_top .prev_crcl {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border: 1px solid #cfd3de;
+  border-radius: 50%;
+  text-indent: -9999em;
+}
+.calendar_top .next_crcl {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  border: 1px solid #cfd3de;
+  border-radius: 50%;
+  text-indent: -9999em;
+}
+
+.tbl_calendar {
+  border-collapse: collapse;
+  border-spacing: 1;
+  width: 100%;
+  margin-bottom: 1px;
+  border-bottom: 1px solid rgba(54, 58, 84, 0.6);
+}
+
+.tbl_calendar table {
+  width: 100%;
+}
+
+.tbl_calendar th {
+  background: #363a54;
+  color: #fff;
+  text-align: center;
+  border-right: 1px solid #979da5;
+  border-bottom: 1px solid #fff;
+  padding: 6px;
+  font-size: 12px;
+}
+
+.all {
+  border-radius: 15px 0 0 0;
+}
+
+.tbl_calendar th:nth-child(2) {
+  /* border-radius: 15px 0 0 0; */
+  color: #ff0000;
+}
+
+.tbl_calendar th:last-child {
+  border-radius: 0 15px 0 0;
+  color: #85e3df;
+}
+
+tbody td:nth-child(2) .sunday {
+  color: #ff0000;
+}
+
+tbody td:last-child .saturday {
+  color: #2497cf;
+}
+
+.tbl_calendar td.sun {
+  background: #363a54;
+  color: #ff0000;
+}
+
+.tbl_calendar td {
+  border-bottom: 1px solid #eaedf1;
+  border-right: 1px solid #eaedf1;
+  color: #70767f;
+  height: 100px;
+}
+
+.tbl_calendar td > div {
+  color: #70767f;
+  height: 100%;
+  padding: 5px;
+}
+
+.other-month {
+  background: rgba(54, 58, 84, 0.1);
+}
+
+.navi_area {
+  display: inline-block;
+  vertical-align: auto;
+}
+
+.today {
+  background-color: rgb(48, 48, 189);
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day_calendar_title {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row; /*주 축이 수평*/
+  justify-content: flex-start;
+  background-color: rgb(250, 249, 248);
+  text-align: left;
+  align-items: center;
+  height: 60px;
+}
+.day_calendar_title .day_blank {
+  width: 80px;
+}
+.day_calendar_title .day_title {
+  font-size: 20px;
+  display: inline-block;
+}
+.day_calendar_title .day_title .day_today {
+  background-color: rgb(18, 93, 230);
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.day_calendar1 {
+  margin-top: 0;
+  border: 1px solid #70767f;
+  height: 60px;
+  width: 100%;
+  background-color: inherit;
+  text-align: left;
+  align-items: center;
+}
+.day_calendar1 .allDay {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #70767f;
+  align-items: center;
+}
+.day_calendar1 .container1 {
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #70767f;
+}
+.day_calendar1 .container1 .item0 {
+  height: 60px;
+  width: 90%;
+  padding-left: 10px;
+  border: 1px solid #70767f;
+  display: flex;
+  align-items: center;
+}
+
+.day_calendar2 {
+  color: #979da5;
+  margin-top: 0;
+  border: 1px solid #70767f;
+  background-color: inherit;
+}
+.day_calendar2 .timeLine {
+  width: 80px;
+  height: 60px;
+  font-size: 11px;
+}
+.day_calendar2 .timeLine .timeBox {
+  padding-left: 10%;
+  height: 30px;
+  font-size: 15px;
+  border: 1px solid #70767f;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-left: 10%;
+}
+.day_calendar2 .timeLine .blankTime {
+  height: 30px;
+  border: 1px solid #70767f;
+}
+.day_calendar2 .item3 {
+  height: 60px;
+  width: 80%;
+  border: 1px solid #70767f;
+}
+.day_calendar2 .item3 .time_schedule .schedule_container {
+  padding-left: 10%;
+  font-size: 15px;
+  border: 1px solid #70767f;
+  align-items: center;
+  padding-left: 10%;
+}
+.day_calendar2 .item3 .time_schedule .schedule_container .schedule1 {
+  height: 30px;
+  border: 1px solid #70767f;
+}
+.day_calendar2 .item3 .time_schedule .middle-time {
+  border: 1px solid #70767f;
+  height: 30px;
 }/*# sourceMappingURL=index.css.map */
