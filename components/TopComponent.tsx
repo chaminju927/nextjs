@@ -1,3 +1,5 @@
+"use client";
+
 import moment from "moment";
 import { useState, useEffect } from "react";
 import MonthComponent from "./MonthComponent";

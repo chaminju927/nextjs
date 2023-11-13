@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import moment from "moment";
 import { weekTitleType } from "@/types/common";
