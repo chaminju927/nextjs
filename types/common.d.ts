@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export interface dataType {
   workerNo: number;
   part: string;
@@ -16,3 +18,9 @@ export type applyType = {
 };
 
 export type applyDataType = dataType & applyType;
+
+export type weekTitleType = {
+  className: string;
+  date?: moment.Moment;
+  day: string;
+};

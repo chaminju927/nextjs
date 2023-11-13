@@ -1,61 +1,45 @@
-"use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import moment from "moment";
 
-// 일요일부터 시작하도록 moment.js 설정 변경
-// moment.updateLocale("en", {
-//   week: {
-//     dow: 0, // 일요일을 주의 첫날로 설정
-//   },
-// });
-function MonthComponent({
-  currentMonth,
-  today,
+const MonthComponent = function MonthComponent({
+  current,
 }: {
-  currentMonth: moment.Moment;
-  today: moment.Moment;
+  current: moment.Moment;
 }): JSX.Element {
-  const [current, setCurrent] = useState<moment.Moment>(currentMonth);
+  const [calendar, setCalendar] = useState<any[]>([]);
+  const [newCurrent, setNewCurrent] = useState<moment.Moment>(current);
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
-  const [firstDayOfMonth, setFirstDayOfMonth] = useState<moment.Moment>(
-    current.startOf("month")
-  );
+  const firstDayOfMonth =
+    //current.clone().
+    moment(newCurrent).startOf("month").startOf("week");
   // 이번달 첫 주
-  const [firstWeek, setFirstWeek] = useState<number>(firstDayOfMonth.week());
+  const firstWeek = firstDayOfMonth.week();
   // 이번달 마지막 주의 마지막 일자
-  const [lastDayOfMonth, setLastDayOfMonth] = useState<moment.Moment>(
-    current.endOf("month")
-  );
+  const lastDayOfMonth = moment(newCurrent).endOf("month").endOf("week");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
-  const [lastWeek, setLastWeek] = useState<number>(
-    lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week()
-  );
-  const [calendar, setCalendar] = useState<moment.Moment[]>([]);
-  //const [week, setWeek] = useState()
+  const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
 
   useEffect(() => {
-    console.log(currentMonth);
-    console.log(current);
     drawTable();
   }, [current]);
 
   const drawTable = () => {
-    console.log(firstWeek);
-    console.log(lastWeek);
     console.log(firstDayOfMonth);
     console.log(lastDayOfMonth);
     const newCalendar = [];
     for (let week = firstWeek; week <= lastWeek; week++) {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
-        var day = firstDayOfMonth.startOf("week").add(i, "days");
-        const isCurrentMonth = day.isSame(current, "month");
-        const isToday = day.isSame(moment(), "day");
         if (i !== 0) {
+          var day = firstDayOfMonth.startOf("week").add(i - 1, "days");
+          const isCurrentMonth = day.isSame(newCurrent, "month");
+          const isToday = day.isSame(moment(), "day");
           weekRow.push({
             key: day.format("YYMMDD"),
             className: isCurrentMonth ? "current-month" : "other-month",
-            day: day.format("DD"),
+            day: day.format("DD").startsWith("0")
+              ? day.format("D")
+              : day.format("DD"),
             isToday: isToday,
           });
         } else {
@@ -64,9 +48,8 @@ function MonthComponent({
       }
       newCalendar.push({ week: week, weekRow: weekRow });
     }
-    //setCalendar(newCalendar);
+    setCalendar(newCalendar);
   };
-
   return (
     <div>
       <div className="tbl_calendar">
@@ -84,9 +67,9 @@ function MonthComponent({
             </tr>
           </thead>
           <tbody id="FlexCalendar">
-            {/* {calendar.map((week) => (
+            {calendar.map((week) => (
               <tr key={week.week}>
-                {week.weekRow.map((day) => (
+                {week.weekRow.map((day: any) => (
                   <td key={day.key} className={day.className}>
                     <div
                       className={`${
@@ -100,12 +83,12 @@ function MonthComponent({
                   </td>
                 ))}
               </tr>
-            ))} */}
+            ))}
           </tbody>
         </table>
       </div>
     </div>
   );
-}
+};
 
 export default MonthComponent;
