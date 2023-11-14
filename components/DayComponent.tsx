@@ -8,26 +8,20 @@ function DayComponent({
   drawTime,
   today,
 }: {
-  dayConverter: string;
+  dayConverter(): any;
   drawTime: any;
   today: moment.Moment;
 }): JSX.Element {
   const scheduleRow: any[] = [];
 
   const [timeLine, setTimeLine] = useState<any[]>(drawTime);
-  const allDayRow: any[] = [];
-  const allDaySchedule = () => {
-    allDayRow.push(<div className="allDayItem">[차민주] 오후 반차</div>);
-    allDayRow.push(<div className="allDayItem">[차민주] 연차 휴가</div>);
-    return allDayRow;
-  };
 
   // 종일 일정 데이터 예시
-  // const allDaySchedule = [
-  //   // { className: "item", data: "[차민주] 오후 반차" },
-  //   { no: 1, className: "item", data: "[차민주] 연차 휴가" },
-  //   { no: 2, className: "item", data: "[차민주] 오후 반차" },
-  // ];
+  const allDaySchedule = [
+    // { className: "item", data: "[차민주] 오후 반차" },
+    { no: 1, className: "allDayItem", data: "[차민주] 연차 휴가" },
+    { no: 2, className: "allDayItem", data: "[차민주] 오후 반차" },
+  ];
 
   //일정 데이터 예시
   let schedule = {
@@ -70,18 +64,19 @@ function DayComponent({
               ? today.format("D")
               : today.format("DD")}
           </span>
-          <span id="today">{dayConverter}</span>
+          <span id="today">{dayConverter()}</span>
         </div>
       </div>
       <div className="day_calendar1">
         <div className="allDay">종일</div>
         <div className="container1">
-          <div className="items">{allDaySchedule()}</div>
-          {/* {allDaySchedule.map((index) => {
-            <div className="items" key={index.no}>
-              <div className={index.className}>{index.data}</div>
-            </div>;
-          })} */}
+          <div className="items">
+            {allDaySchedule.map((item) => (
+              <div className={item.className} key={item.no}>
+                {item.data}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="day_calendar2">

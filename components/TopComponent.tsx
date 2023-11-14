@@ -9,7 +9,6 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import DayComponent from "./DayComponent";
 import WeekComponent from "./WeekComponent";
 import { JSXType, dayType, voidFnType } from "../types/common";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 
 const now = moment();
 const today = now;
@@ -66,8 +65,6 @@ const drawTime: any = () => {
 function TopComponent(): JSX.Element {
   const [current, setCurrent] = useState<moment.Moment>(now);
   const [currentString, setCurrentString] = useState<string>();
-  const [type, setType] = useState<string>("month");
-
   const [calendarType, setCalendarType] = useState<string>(selectType.MONTH);
 
   const [dateNow, setDateNow] = useState<string>(now.format("YYYY.MM.DD"));
@@ -162,7 +159,7 @@ function TopComponent(): JSX.Element {
         {selectWeekType()}
         {selectBox}
         <WeekComponent
-          dayConverter={dayConverter()}
+          dayConverter={dayConverter}
           today={today}
           drawTime={drawTime}
         />
@@ -174,7 +171,7 @@ function TopComponent(): JSX.Element {
         {selectDayType()}
         {selectBox}
         <DayComponent
-          dayConverter={dayConverter()}
+          dayConverter={dayConverter}
           drawTime={drawTime}
           today={today}
         />

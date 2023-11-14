@@ -1,15 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import moment from "moment";
 import { weekTitleType, voidFnType } from "@/types/common";
 
+type dayType = (dayNumber: number) => string;
 function WeekComponent({
   dayConverter,
   today,
   drawTime,
 }: {
-  dayConverter: string;
+  dayConverter: dayType;
   today: moment.Moment;
   drawTime: any;
 }): JSX.Element {
@@ -17,6 +18,7 @@ function WeekComponent({
   // 타임라인
   const [timeLine, setTimeLine] = useState<any[]>(drawTime);
   //const [weekTitle, setWeekTitle] = useState<weekTitleType[]>([]);
+
   // 1주일 제목 출력
   const drawWeek: voidFnType = useCallback(() => {
     var weekTitle: weekTitleType[] = [];
@@ -32,35 +34,39 @@ function WeekComponent({
             className:
               i === 1 ? "weekendSun" : i === 7 ? "weekendSat" : "weeekdays",
             date: moment(today).startOf("week").add(i, "days"),
-            day: dayConverter,
+            day: dayConverter(
+              moment(today).startOf("week").add(i, "days").day()
+            ),
           });
     }
     // setWeekRow({ ...weekTitle });
     setWeekRow(weekTitle);
   }, [dayConverter, today]);
 
-  useEffect(() => {
-    drawWeek();
-  }, [drawWeek]);
   return (
     <div className="contentCalendar">
       <div className="weekContainer">
         <div className="weekContents">
           <span>
-            {/* {weekRow.weekTitle.map((data) => {
-              <div className={data.weekRow.weekTitle.className}>
-                {data.weekTitle.content}
-              </div>;
-            })} */}
-            {today.format("DD").startsWith("0")
+            {weekRow.map((data, index) => (
+              <div key={index} className={data.className}>
+                {data.day}
+              </div>
+            ))}
+            {/* {today.format("DD").startsWith("0")
               ? today.format("D")
-              : today.format("DD")}
+              : today.format("DD")} */}
           </span>
-          <span id="dayTitle">{dayConverter}</span>
+          {/* <span id="dayTitle">{dayConverter()}</span> */}
         </div>
       </div>
       <div className="calendarContainer">
-        <div className="timeZone">{timeLine}</div>
+        <div className="timeZone">
+          {timeLine}
+          {/* {timeLine.map((timeElement, index) => (
+            <div key={index}>{timeElement}</div>
+          ))} */}
+        </div>
         <div className="weekSchedule"></div>
       </div>
     </div>
