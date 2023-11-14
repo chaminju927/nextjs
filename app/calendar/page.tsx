@@ -1,9 +1,10 @@
-import MainComponent from "@/components/MainComponent";
+import MonthComponent from "@/components/MonthComponent";
+import TopComponent from "@/components/TopComponent";
+
 export default function Page(): JSX.Element {
   return (
     <div>
-      <MainComponent />
-      {/* <MonthComponent /> */}
+      <TopComponent />
     </div>
   );
 }

@@ -1,65 +1,47 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import moment from "moment";
-import { weekTitleType } from "@/types/common";
-
-const currentMoment = moment();
-const current = currentMoment;
+import { weekTitleType, voidFnType } from "@/types/common";
 
 function WeekComponent({
   dayConverter,
+  today,
+  drawTime,
 }: {
-  dayConverter: () => string;
+  dayConverter: string;
+  today: moment.Moment;
+  drawTime: any;
 }): JSX.Element {
-  const startTime = moment(current).startOf("day");
-  const endTime = moment(current).endOf("day");
-  const time = startTime;
-
-  const [weekRow, setWeekRow] = useState<weekTitleType[]>([]);
-  useEffect(() => {
-    drawTime();
-    drawWeek();
-  }, [current]);
-
+  const [weekRow, setWeekRow] = useState<any[]>([]);
+  // 타임라인
+  const [timeLine, setTimeLine] = useState<any[]>(drawTime);
+  //const [weekTitle, setWeekTitle] = useState<weekTitleType[]>([]);
   // 1주일 제목 출력
-  const drawWeek = () => {
+  const drawWeek: voidFnType = useCallback(() => {
     var weekTitle: weekTitleType[] = [];
     for (let i = 0; i < 7; i++) {
       i === 0
         ? weekTitle.push({
-            className: "",
+            //push 대신 setstate사용하기
+            className: " ",
+
             day: "",
           })
         : weekTitle.push({
             className:
               i === 1 ? "weekendSun" : i === 7 ? "weekendSat" : "weeekdays",
-            date: moment(current).startOf("week").add(i, "days"),
-            day: dayConverter(),
+            date: moment(today).startOf("week").add(i, "days"),
+            day: dayConverter,
           });
     }
-    setWeekRow({ ...weekTitle });
-  };
+    // setWeekRow({ ...weekTitle });
+    setWeekRow(weekTitle);
+  }, [dayConverter, today]);
 
-  // 시간대 출력 (30분 단위)
-  const drawTime = () => {
-    const timeLineRow = [];
-    for (time; time.isSameOrBefore(endTime); time.add(30, "minutes")) {
-      time.format("mm") === "00" ? (
-        timeLineRow.push(
-          <div key={time.format("HH:mm")} className="timeBox">
-            <span id="times">{time.format("HH:mm")}</span>
-          </div>
-        )
-      ) : (
-        <div key={time.format("HH:mm")} className="blankTime">
-          <span></span>
-        </div>
-      );
-    }
-    return timeLineRow;
-  };
-
+  useEffect(() => {
+    drawWeek();
+  }, [drawWeek]);
   return (
     <div className="contentCalendar">
       <div className="weekContainer">
@@ -70,15 +52,15 @@ function WeekComponent({
                 {data.weekTitle.content}
               </div>;
             })} */}
-            {current.format("DD").startsWith("0")
-              ? current.format("D")
-              : current.format("DD")}
+            {today.format("DD").startsWith("0")
+              ? today.format("D")
+              : today.format("DD")}
           </span>
-          <span id="dayTitle">{dayConverter()}</span>
+          <span id="dayTitle">{dayConverter}</span>
         </div>
       </div>
       <div className="calendarContainer">
-        <div className="timeZone">{drawTime()}</div>
+        <div className="timeZone">{timeLine}</div>
         <div className="weekSchedule"></div>
       </div>
     </div>

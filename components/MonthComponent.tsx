@@ -1,40 +1,28 @@
 "use client";
 
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState, useCallback } from "react";
 import moment from "moment";
 
-const MonthComponent = function MonthComponent({
-  current,
-}: {
-  current: moment.Moment;
-}): JSX.Element {
+function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const [calendar, setCalendar] = useState<any[]>([]);
-  const [newCurrent, setNewCurrent] = useState<moment.Moment>(current);
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
-  const firstDayOfMonth =
-    //current.clone().
-    moment(newCurrent).startOf("month").startOf("week");
+  const firstDayOfMonth = moment(current).startOf("month").startOf("week");
   // 이번달 첫 주
   const firstWeek = firstDayOfMonth.week();
   // 이번달 마지막 주의 마지막 일자
-  const lastDayOfMonth = moment(newCurrent).endOf("month").endOf("week");
+  const lastDayOfMonth = moment(current).endOf("month").endOf("week");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
   const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
 
-  useEffect(() => {
-    drawTable();
-  }, [current]);
-
-  const drawTable = () => {
-    console.log(firstDayOfMonth);
-    console.log(lastDayOfMonth);
+  const drawTable = useCallback(() => {
     const newCalendar = [];
     for (let week = firstWeek; week <= lastWeek; week++) {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
         if (i !== 0) {
-          var day = firstDayOfMonth.startOf("week").add(i - 1, "days");
-          const isCurrentMonth = day.isSame(newCurrent, "month");
+          var day =
+            moment(firstDayOfMonth).add((week - firstWeek) * 7 + i - 1, "days");
+          const isCurrentMonth = day.isSame(current, "month");
           const isToday = day.isSame(moment(), "day");
           weekRow.push({
             key: day.format("YYMMDD"),
@@ -51,7 +39,12 @@ const MonthComponent = function MonthComponent({
       newCalendar.push({ week: week, weekRow: weekRow });
     }
     setCalendar(newCalendar);
-  };
+  }, [current, firstDayOfMonth, firstWeek, lastWeek]);
+
+  useEffect(() => {
+    drawTable();
+  }, [current, drawTable]);
+
   return (
     <div>
       <div className="tbl_calendar">
@@ -91,6 +84,6 @@ const MonthComponent = function MonthComponent({
       </div>
     </div>
   );
-};
+}
 
 export default MonthComponent;

@@ -475,11 +475,15 @@ $border: 1px solid #70767f;
   border-spacing: 1;
   width: 100%;
   margin-bottom: 1px;
-  border-bottom: 1px solid rgb(54 58 84 / 60%);
+  // border-bottom: 1px solid rgb(54 58 84 / 60%);
+  margin-left: 5%;
+  margin-top: 5px;
 }
-
 .tbl_calendar table {
-  width: 100%;
+  border-radius: 15px 0 0 0 !important;
+  width: 90%;
+  background-color: white;
+  border-collapse: collapse;
 }
 
 .tbl_calendar th {
@@ -532,6 +536,7 @@ tbody td:last-child .saturday {
 
 .other-month {
   background: rgb(54 58 84 / 10%);
+  border-right: white 1px solid !important;
 }
 
 .navi_area {
@@ -549,6 +554,10 @@ tbody td:last-child .saturday {
   align-items: center;
   justify-content: center;
 }
+.weekComponentBox {
+  background-color: white;
+}
+
 .day_calendar_title {
   // border-radius: 15px 15px 0 0;
   margin-top: 10px;
@@ -580,94 +589,211 @@ tbody td:last-child .saturday {
 }
 .day_calendar1 {
   margin-top: 0;
-  //display: flex;
+  display: flex;
+  box-sizing: content-box;
   //flex-direction: row; /*주 축이 수직*/
   //justify-content: flex-start;
   // border-top: none !important;
   border: $border;
-  height: 60px;
+  border-bottom: none !important;
+  height: 80px;
   width: 100%;
   background-color: inherit;
   text-align: left;
   align-items: center;
   .allDay {
-    width: 40px;
+    width: 80px;
     text-align: center;
-    border: $border;
+    // border: $border;
     align-items: center;
+    font-size: 0.8em;
   }
   //종일 일정 컨테이너
   .container1 {
-    flex-direction: column;
     display: flex;
     justify-content: flex-start;
     border: $border;
-    .item0 {
+    border-right: none !important;
+    box-sizing: content-box;
+    width: 90%;
+    height: 80px;
+    .items {
+      flex-direction: column;
+      width: 100%;
       height: 60px;
-      width: 90%;
       padding-left: 10px;
-      border: $border;
+      // border: $border;
       display: flex;
       align-items: center;
+      .allDayItem {
+        background-color: #eaedf1;
+        margin-top: 5px;
+        font-size: 0.8em;
+        width: 100%;
+        height: 30px;
+      }
     }
   }
 }
 .day_calendar2 {
-  color: #979da5;
   margin-top: 0;
-  // display: flex;
-  // flex-direction: row; /*주 축이 수직*/
+  box-sizing: content-box;
+  display: flex;
   // justify-content: flex-start;
   // overflow-y: scroll;
-  // border-top: none !important;
-  // border-bottom: $border
   border: $border;
+  border-collapse: collapse;
+  border-left: none !important;
   background-color: inherit;
+  height: 100%;
   //text-align: left;
   .timeLine {
     // float: left;
     width: 80px;
-    height: 60px;
+    color: #979da5;
+    height: 100%;
     font-size: 11px;
     // border-bottom: none !important;
     .timeBox {
       padding-left: 10%;
-      height: 30px;
       font-size: 15px;
       border: $border;
       display: flex;
       align-items: center;
       text-align: center;
+      vertical-align: center;
       padding-left: 10%;
+      #times {
+        height: 50px;
+      }
     }
     .blankTime {
       height: 30px;
       border: $border;
     }
   }
-  .item3 {
-    height: 60px;
-    width: 80%;
-    border: $border;
+  .schedule_container {
+    height: 100%;
+    width: 90%;
+    //border: $border;
     .time_schedule {
+      width: 100%;
       .schedule_container {
+        height: 100px;
         padding-left: 10%;
-        // height: 30px;
-        font-size: 15px;
         border: $border;
         // display: flex;
         align-items: center;
-        // text-align: center;
         padding-left: 10%;
         .schedule1 {
-          height: 30px;
-          border: $border;
+          height: 50px;
+          width: 100%;
+          //border: $border;
+          border-bottom: $border;
         }
       }
-      .middle-time {
-        border: $border;
-        height: 30px;
+      .before30m {
+        font-size: 0.8em;
+        border-bottom: dotted 1px #979da5;
+        height: 25px;
+        width: 100%;
       }
+      .after30m {
+        font-size: 0.8em;
+        // border: $border;
+        height: 25px;
+        border-bottom: $border;
+      }
+    }
+  }
+}
+
+/*WeekComponent*/
+.contentCalendar {
+  background-color: white;
+  height: 100%;
+  position: relative;
+  box-sizing: border-box;
+  // font-size: 10px;
+  // min-height: 600px;
+  border: $border;
+  .weekContainer {
+    font-size: 20px;
+    border-top: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid rgb(237, 235, 232);
+    height: 40px;
+    background-color: inherit;
+    text-align: left;
+    .weekContents {
+      margin-left: 88px;
+      box-sizing: border-box;
+      display: flex;
+      #dayTitle {
+        margin-left: 5px;
+      }
+      .weekendSun {
+        border: $border;
+        width: 8.333333333333334%;
+        left: 0%;
+        line-height: 41px;
+        border-left: solid 1px #edebe8;
+        padding-left: 0;
+      }
+      .weekdays {
+        width: 16.666666666666668%;
+        left: 8.333333333333334%;
+        line-height: 41px;
+        border-left: solid 1px #edebe8;
+        padding-left: 0;
+      }
+      .weekendSat {
+        width: 8.333333333333334%;
+        left: 91.66666666666669%;
+        line-height: 41px;
+        border-left: solid 1px #edebe8;
+        padding-left: 0;
+      }
+    }
+  }
+  .calendarContainer {
+    height: 625px;
+    position: relative;
+
+    .timeZone {
+      // position: absolute;
+      // top: 0;
+      // width: 100%;
+      // height: 50px;
+      // left: 0%;
+      // border: $border;
+      // //   border-right: 1px solid #e5e5e5;
+      // background-color: white;
+      // float: left;
+      width: 80px;
+      color: #979da5;
+      height: 100%;
+      font-size: 11px;
+      // border-bottom: none !important;
+      .timeBox {
+        padding-left: 10%;
+        font-size: 15px;
+        border: $border;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        vertical-align: center;
+        padding-left: 10%;
+        #times {
+          height: 50px;
+        }
+      }
+      .blankTime {
+        height: 30px;
+        border: $border;
+      }
+    }
+    .weekSchedule {
+      border: $border;
     }
   }
 }
