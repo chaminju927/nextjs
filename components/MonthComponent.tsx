@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import moment from "moment";
+import { JSXArrType, JSXType, calendarType } from "@/types/common";
 
 function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const [calendar, setCalendar] = useState<any[]>([]);
@@ -13,6 +14,7 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const lastDayOfMonth = moment(current).endOf("month").endOf("week");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
   const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
+  // const [renderState, setRenderState] = useState(false);
 
   const drawTable = useCallback(() => {
     const newCalendar = [];
@@ -20,8 +22,10 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
       const weekRow = [];
       for (let i = 0; i < 8; i++) {
         if (i !== 0) {
-          var day =
-            moment(firstDayOfMonth).add((week - firstWeek) * 7 + i - 1, "days");
+          var day = moment(firstDayOfMonth).add(
+            (week - firstWeek) * 7 + i - 1,
+            "days"
+          );
           const isCurrentMonth = day.isSame(current, "month");
           const isToday = day.isSame(moment(), "day");
           weekRow.push({
@@ -43,7 +47,7 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
 
   useEffect(() => {
     drawTable();
-  }, [current, drawTable]);
+  }, []);
 
   return (
     <div>
@@ -62,7 +66,7 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
             </tr>
           </thead>
           <tbody id="FlexCalendar">
-            {calendar.map((week) => (
+            {calendar.map((week: any) => (
               <tr key={week.week}>
                 {week.weekRow.map((day: any) => (
                   <td key={day.key} className={day.className}>

@@ -2,25 +2,25 @@
 
 import { useEffect, useState } from "react";
 import moment from "moment";
+import TimelineComponent from "./TimelineComponent";
+import { dayType } from "@/types/common";
 
+const now = moment();
+const today = now;
 function DayComponent({
   dayConverter,
-  drawTime,
-  today,
 }: {
-  dayConverter(): any;
-  drawTime: any;
-  today: moment.Moment;
+  dayConverter: dayType;
 }): JSX.Element {
-  const scheduleRow: any[] = [];
-
-  const [timeLine, setTimeLine] = useState<any[]>(drawTime);
-
+  const scheduleRow: JSX.Element[] = [];
+  const dateFormat = today.format("DD").startsWith("0")
+    ? today.format("D")
+    : today.format("DD");
   // 종일 일정 데이터 예시
   const allDaySchedule = [
     // { className: "item", data: "[차민주] 오후 반차" },
-    { no: 1, className: "allDayItem", data: "[차민주] 연차 휴가" },
-    { no: 2, className: "allDayItem", data: "[차민주] 오후 반차" },
+    { className: "allDayItem", data: "[차민주] 연차 휴가" },
+    { className: "allDayItem", data: "[차민주] 오후 반차" },
   ];
 
   //일정 데이터 예시
@@ -29,7 +29,6 @@ function DayComponent({
     end: "10:00",
     detail: "[한국후지필름BI] 현장 안정화 패치",
   };
-
   // 시간대별 일정
   const timeSchedule = () => {
     for (
@@ -38,11 +37,11 @@ function DayComponent({
       i++ // let time = startTime; // time.isSameOrBefore(endTime) ; // time.add(30, "minutes")
     ) {
       scheduleRow.push(
-        <div className="time_schedule">
+        <div className="time_schedule" key={i}>
           {/* {time.format("HH:mm") === schedule.start ? ( */}
           <div className="before30m">
             <div className="schedule1">
-              {schedule.start}-{schedule.end}: {schedule.detail}
+              {schedule.start}: {schedule.detail}
             </div>
           </div>
           <div className="after30m">
@@ -59,20 +58,16 @@ function DayComponent({
       <div className="day_calendar_title">
         <div className="day_blank"></div>
         <div className="day_title">
-          <span className="day_current">
-            {today.format("DD").startsWith("0")
-              ? today.format("D")
-              : today.format("DD")}
-          </span>
-          <span id="today">{dayConverter()}</span>
+          <span className="day_current">{dateFormat}</span>
+          <span className="day_today">{dayConverter(today.day())}</span>
         </div>
       </div>
       <div className="day_calendar1">
         <div className="allDay">종일</div>
         <div className="container1">
           <div className="items">
-            {allDaySchedule.map((item) => (
-              <div className={item.className} key={item.no}>
+            {allDaySchedule.map((item, index) => (
+              <div className={item.className} key={index}>
                 {item.data}
               </div>
             ))}
@@ -80,7 +75,9 @@ function DayComponent({
         </div>
       </div>
       <div className="day_calendar2">
-        <div className="timeLine">{timeLine}</div>
+        <div className="timeLine">
+          <TimelineComponent />
+        </div>
         <div className="schedule_container">
           <div>{timeSchedule()}</div>
         </div>

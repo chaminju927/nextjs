@@ -98,16 +98,16 @@ body .container .header-container .floatL .notice {
   text-align: center;
   color: #30343b;
   height: 40px;
-  border-bottom: 1px solid #c5cedb;
+  border-bottom: 1px solid 1px solid #c5cedb;
   border-left: 1px solid #d2d6e0;
   vertical-align: middle;
 }
 .mainForm .mainTable .table td {
   height: 40px;
-  border-bottom: 1px solid #c5cedb;
+  border-bottom: 1px solid 1px solid #c5cedb;
   border-left: 1px solid #d2d6e0;
   vertical-align: middle;
-  border-bottom: 1px solid #c5cedb;
+  border-bottom: 1px solid 1px solid #c5cedb;
   border-left: 1px solid #d2d6e0;
 }
 .mainForm .mainTable .table td:first-child {
@@ -264,7 +264,7 @@ tr {
   font-size: 0.8;
   font-weight: 500;
   border-left: 1px solid #d2d6e0;
-  border-bottom: 1px solid #c5cedb;
+  border-bottom: 1px solid 1px solid #c5cedb;
   background-color: #ebeef3;
   text-align: center;
 }
@@ -274,7 +274,7 @@ tr {
   font-size: 13px;
   font-weight: 500;
   border-left: 1px solid #d2d6e0;
-  border-bottom: 1px solid #c5cedb;
+  border-bottom: 1px solid 1px solid #c5cedb;
   border-right: 1px solid #d2d6e0;
   padding: 5px;
 }
@@ -352,7 +352,7 @@ tr {
   font-size: 13px;
   text-align: center;
   width: 100px;
-  border-left: #c5cedb;
+  border-left: 1px solid #c5cedb;
 }
 
 /*sideBar*/
@@ -511,28 +511,32 @@ tbody td:last-child .saturday {
   justify-content: center;
 }
 
+/* DayComponent */
 .weekComponentBox {
   background-color: white;
+  width: 90%;
+  margin-left: 5%;
+  border: 1px solid #e5e5e5;
 }
-
-.day_calendar_title {
+.weekComponentBox .day_calendar_title {
   margin-top: 10px;
   display: flex;
-  flex-direction: row; /*주 축이 수평*/
-  justify-content: flex-start;
   background-color: rgb(250, 249, 248);
   text-align: left;
   align-items: center;
   height: 60px;
 }
-.day_calendar_title .day_blank {
+.weekComponentBox .day_calendar_title .day_blank {
   width: 80px;
 }
-.day_calendar_title .day_title {
+.weekComponentBox .day_calendar_title .day_title {
   font-size: 20px;
-  display: inline-block;
+  display: flex;
 }
-.day_calendar_title .day_title .day_today {
+.weekComponentBox .day_calendar_title .day_title .day_current {
+  margin-right: 5px;
+}
+.weekComponentBox .day_calendar_title .day_title .day_today {
   background-color: rgb(18, 93, 230);
   color: white;
   border-radius: 50%;
@@ -542,12 +546,11 @@ tbody td:last-child .saturday {
   justify-content: center;
   display: flex;
 }
-
-.day_calendar1 {
+.weekComponentBox .day_calendar1 {
   margin-top: 0;
   display: flex;
   box-sizing: content-box;
-  border: 1px solid #70767f;
+  border: 1px solid #e5e5e5;
   border-bottom: none !important;
   height: 80px;
   width: 100%;
@@ -555,22 +558,22 @@ tbody td:last-child .saturday {
   text-align: left;
   align-items: center;
 }
-.day_calendar1 .allDay {
+.weekComponentBox .day_calendar1 .allDay {
   width: 80px;
   text-align: center;
   align-items: center;
   font-size: 0.8em;
 }
-.day_calendar1 .container1 {
+.weekComponentBox .day_calendar1 .container1 {
   display: flex;
   justify-content: flex-start;
-  border: 1px solid #70767f;
+  border: 1px solid #e5e5e5;
   border-right: none !important;
   box-sizing: content-box;
   width: 90%;
   height: 80px;
 }
-.day_calendar1 .container1 .items {
+.weekComponentBox .day_calendar1 .container1 .items {
   flex-direction: column;
   width: 100%;
   height: 60px;
@@ -578,73 +581,73 @@ tbody td:last-child .saturday {
   display: flex;
   align-items: center;
 }
-.day_calendar1 .container1 .items .allDayItem {
+.weekComponentBox .day_calendar1 .container1 .items .allDayItem {
   background-color: #eaedf1;
   margin-top: 5px;
+  margin-right: 5px;
   font-size: 0.8em;
   width: 100%;
   height: 30px;
 }
-
-.day_calendar2 {
+.weekComponentBox .day_calendar2 {
   margin-top: 0;
   box-sizing: content-box;
   display: flex;
-  border: 1px solid #70767f;
+  border: 1px solid #e5e5e5;
   border-collapse: collapse;
   border-left: none !important;
   background-color: inherit;
   height: 100%;
 }
-.day_calendar2 .timeLine {
+.weekComponentBox .day_calendar2 .timeLine {
   width: 80px;
   color: #979da5;
   height: 100%;
   font-size: 11px;
 }
-.day_calendar2 .timeLine .timeBox {
+.weekComponentBox .day_calendar2 .timeLine .timeBox {
   padding-left: 10%;
   font-size: 15px;
-  border: 1px solid #70767f;
+  border: 1px solid #e5e5e5;
   display: flex;
   align-items: center;
   text-align: center;
   vertical-align: center;
   padding-left: 10%;
 }
-.day_calendar2 .timeLine .timeBox #times {
+.weekComponentBox .day_calendar2 .timeLine .timeBox #times {
   height: 50px;
 }
-.day_calendar2 .timeLine .blankTime {
+.weekComponentBox .day_calendar2 .timeLine .blankTime {
   height: 30px;
-  border: 1px solid #70767f;
+  border: 1px solid #e5e5e5;
 }
-.day_calendar2 .schedule_container {
+.weekComponentBox .day_calendar2 .schedule_container {
   height: 100%;
   width: 90%;
 }
-.day_calendar2 .schedule_container .time_schedule {
+.weekComponentBox .day_calendar2 .schedule_container .time_schedule {
   width: 100%;
 }
-.day_calendar2 .schedule_container .time_schedule .schedule_container {
+.weekComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container {
   height: 100px;
   padding-left: 10%;
   border: 1px solid #70767f;
   align-items: center;
   padding-left: 10%;
 }
-.day_calendar2 .schedule_container .time_schedule .schedule_container .schedule1 {
+.weekComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container .schedule1 {
   height: 50px;
   width: 100%;
   border-bottom: 1px solid #70767f;
 }
-.day_calendar2 .schedule_container .time_schedule .before30m {
+.weekComponentBox .day_calendar2 .schedule_container .time_schedule .before30m {
   font-size: 0.8em;
   border-bottom: dotted 1px #979da5;
   height: 25px;
   width: 100%;
 }
-.day_calendar2 .schedule_container .time_schedule .after30m {
+.weekComponentBox .day_calendar2 .schedule_container .time_schedule .after30m {
   font-size: 0.8em;
   height: 25px;
   border-bottom: 1px solid #70767f;
@@ -656,7 +659,6 @@ tbody td:last-child .saturday {
   height: 100%;
   position: relative;
   box-sizing: border-box;
-  border: 1px solid #70767f;
 }
 .contentCalendar .weekContainer {
   font-size: 20px;
@@ -671,11 +673,8 @@ tbody td:last-child .saturday {
   box-sizing: border-box;
   display: flex;
 }
-.contentCalendar .weekContainer .weekContents #dayTitle {
-  margin-left: 5px;
-}
 .contentCalendar .weekContainer .weekContents .weekendSun {
-  border: 1px solid #70767f;
+  border: solid 1px #edebe8;
   width: 8.3333333333%;
   left: 0%;
   line-height: 41px;
@@ -684,32 +683,39 @@ tbody td:last-child .saturday {
 }
 .contentCalendar .weekContainer .weekContents .weekdays {
   width: 16.6666666667%;
-  left: 8.3333333333%;
   line-height: 41px;
-  border-left: solid 1px #edebe8;
+  border: solid 1px #edebe8;
   padding-left: 0;
 }
 .contentCalendar .weekContainer .weekContents .weekendSat {
   width: 8.3333333333%;
   left: 91.6666666667%;
   line-height: 41px;
-  border-left: solid 1px #edebe8;
+  border: solid 1px #edebe8;
   padding-left: 0;
 }
+.contentCalendar .allDayScheduleBox {
+  height: 93px;
+}
+.contentCalendar .allDayScheduleBox .allDayTitle {
+  border-right: 1px solid #e5e5e5;
+  width: 88px;
+  background-color: inherit;
+  padding-right: 12px;
+}
 .contentCalendar .calendarContainer {
-  height: 625px;
+  height: 100%;
   position: relative;
 }
 .contentCalendar .calendarContainer .timeZone {
-  width: 80px;
+  width: 88px;
   color: #979da5;
-  height: 100%;
   font-size: 11px;
 }
 .contentCalendar .calendarContainer .timeZone .timeBox {
   padding-left: 10%;
   font-size: 15px;
-  border: 1px solid #70767f;
+  border: solid 1px #edebe8;
   display: flex;
   align-items: center;
   text-align: center;
@@ -721,8 +727,14 @@ tbody td:last-child .saturday {
 }
 .contentCalendar .calendarContainer .timeZone .blankTime {
   height: 30px;
-  border: 1px solid #70767f;
+  border: solid 1px #edebe8;
 }
 .contentCalendar .calendarContainer .weekSchedule {
-  border: 1px solid #70767f;
+  border: solid 1px #edebe8;
+  height: 672px;
+  position: relative;
+}
+
+.select_term {
+  margin-bottom: 5px;
 }/*# sourceMappingURL=index.css.map */

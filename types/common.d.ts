@@ -19,16 +19,21 @@ export type applyType = {
 
 export type applyDataType = dataType & applyType;
 
-export type dayType = () => string;
-
 //functiontype
+export type dayType = (dayNo: number) => string;
 export type voidFnType = () => void;
 export type JSXArrType = () => JSX.Element[];
 export type JSXType = () => JSX.Element;
 
-// Weekcomponent title
 export type weekTitleType = {
   className: string;
-  date?: moment.Moment;
+  date: moment.Moment;
   day: string;
+};
+
+export type calendarType = {
+  key: string;
+  className: string;
+  day: string;
+  isToday: boolean;
 };
