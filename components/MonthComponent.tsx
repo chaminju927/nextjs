@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from "react";
 import moment from "moment";
-import { JSXArrType, JSXType, scheduleType, voidFnType } from "@/types/common";
+import { voidFnType } from "@/types/common";
 import ScheduleModalComponent from "./ScheduleModalComponent";
 
 const storage = window.localStorage;
@@ -103,11 +103,58 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
                       <span className={day.isToday ? "today" : ""} id={day.id}>
                         {day.day}
                       </span>
+                      {/* 여기에 수정된 부분 */}
+                      {day.schedule ? (
+                        <div className="schedule-container">
+                          <div className="schedule-title">
+                            {day.schedule.title}
+                          </div>
+                          <div className="schedule-name">
+                            {day.schedule.name}
+                          </div>
+                          <div className="schedule-content">
+                            {day.schedule.content}
+                          </div>
+                        </div>
+                      ) : (
+                        // day.schedule이 없으면 로컬 스토리지에서 데이터를 가져와서 표시
+                        <div className="schedule-container">
+                          {(() => {
+                            const storedSchedule = storage.getItem(day.key);
+                            const parsedSchedule = storedSchedule
+                              ? JSON.parse(storedSchedule)
+                              : null;
+
+                            return parsedSchedule ? (
+                              <>
+                                <div className="schedule-title">
+                                  {parsedSchedule.title}
+                                </div>
+                                <div className="schedule-name">
+                                  {parsedSchedule.name}
+                                </div>
+                                <div className="schedule-content">
+                                  {parsedSchedule.content}
+                                </div>
+                              </>
+                            ) : (
+                              // 저장된 데이터가 없을 경우 표시할 내용
+                              <div className="no-schedule"></div>
+                            );
+                          })()}
+                        </div>
+                      )}
                     </div>
                   </td>
                 ))}
               </tr>
             ))}
+
+            {/* </div>
+                  </td>
+                ))}
+              </tr>
+            ))} */}
           </tbody>
           <ScheduleModalComponent
             isOpen={isModalOpen}
