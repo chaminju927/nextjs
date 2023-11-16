@@ -2,7 +2,10 @@
 
 import { useEffect, useState, useCallback } from "react";
 import moment from "moment";
-import { JSXArrType, JSXType, calendarType } from "@/types/common";
+import { JSXArrType, JSXType, scheduleType, voidFnType } from "@/types/common";
+import ScheduleModalComponent from "./ScheduleModalComponent";
+
+const storage = window.localStorage;
 
 function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const [calendar, setCalendar] = useState<any[]>([]);
@@ -14,9 +17,15 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const lastDayOfMonth = moment(current).endOf("month").endOf("week");
   // 이번달 마지막 주 (12월 마지막주가 1월로 넘어갈 경우 총 53주)
   const lastWeek = lastDayOfMonth.week() === 1 ? 53 : lastDayOfMonth.week();
-  // const [renderState, setRenderState] = useState(false);
+  // modal로 보낼 클릭한 날짜
+  const [propsKey, setPropsKey] = useState<string>("");
+  //스케쥴 입력 모달창
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const drawTable = useCallback(() => {
+  const handleOpen = () => setIsModalOpen(true);
+  const handleClose = () => setIsModalOpen(false);
+
+  const drawTable: voidFnType = useCallback(() => {
     const newCalendar = [];
     for (let week = firstWeek; week <= lastWeek; week++) {
       const weekRow = [];
@@ -29,7 +38,7 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
           const isCurrentMonth = day.isSame(current, "month");
           const isToday = day.isSame(moment(), "day");
           weekRow.push({
-            key: day.format("YYMMDD"),
+            key: day.format("YY.MM.DD"),
             className: isCurrentMonth ? "current-month" : "other-month",
             day: day.format("DD").startsWith("0")
               ? day.format("D")
@@ -37,7 +46,7 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
             isToday: isToday,
           });
         } else {
-          weekRow.push({ key: `empty-${week}`, className: "current-month" });
+          weekRow.push({ key: `empty-${week}}`, className: "current-month" });
         }
       }
       newCalendar.push({ week: week, weekRow: weekRow });
@@ -47,8 +56,19 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
 
   useEffect(() => {
     drawTable();
-  }, []);
+  }, [current, storage]);
 
+  const closeModal: voidFnType = () => {
+    setIsModalOpen(false);
+  };
+
+  // 날짜 클릭시 모달 오픈
+  const makeSchedule = (e: React.MouseEvent) => {
+    const keyName = e.currentTarget.id;
+    setPropsKey(keyName);
+    console.log(keyName);
+    setIsModalOpen(true);
+  };
   return (
     <div>
       <div className="tbl_calendar">
@@ -69,13 +89,18 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
             {calendar.map((week: any) => (
               <tr key={week.week}>
                 {week.weekRow.map((day: any) => (
-                  <td key={day.key} className={day.className}>
+                  <td
+                    key={day.key}
+                    id={day.key}
+                    className={day.className}
+                    onClick={makeSchedule}
+                  >
                     <div
                       className={`${
                         day.key === "YYMMDD" ? "sunday" : "weekday"
                       }`}
                     >
-                      <span className={day.isToday ? "today" : ""}>
+                      <span className={day.isToday ? "today" : ""} id={day.id}>
                         {day.day}
                       </span>
                     </div>
@@ -84,6 +109,11 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
               </tr>
             ))}
           </tbody>
+          <ScheduleModalComponent
+            isOpen={isModalOpen}
+            closeModal={closeModal}
+            propsKey={propsKey}
+          />
         </table>
       </div>
     </div>

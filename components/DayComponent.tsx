@@ -54,7 +54,7 @@ function DayComponent({
   };
 
   return (
-    <div className="weekComponentBox">
+    <div className="dayComponentBox">
       <div className="day_calendar_title">
         <div className="day_blank"></div>
         <div className="day_title">

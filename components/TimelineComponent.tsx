@@ -1,11 +1,11 @@
 "use client";
 
+import { voidFnType } from "@/types/common";
 import moment from "moment";
 import { useState, useEffect, useCallback, useMemo } from "react";
 
 const now = moment();
 const today = now;
-const startTime = moment(today).startOf("day");
 const endTime = moment(today).endOf("day");
 
 function TimelineComponent() {
@@ -16,7 +16,7 @@ function TimelineComponent() {
   }, []);
 
   // 시간대 출력 (30분 단위)
-  const drawTime: any = () => {
+  const drawTime: voidFnType = () => {
     var timeLineRow = [];
     for (time; time.isSameOrBefore(endTime); time.add(30, "minutes")) {
       time.format("mm") === "00" ? (
@@ -31,7 +31,6 @@ function TimelineComponent() {
         </div>
       );
       setRenderTime(timeLineRow);
-      //  console.log(timeLineRow);
     }
   };
   return <div>{renderTime}</div>;

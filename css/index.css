@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /*한글 주석처리시 설정*/
+/*WeekComponent*/
 /* Main Component - header, background */
 body {
   background-color: #ebeef3;
@@ -450,6 +451,10 @@ tr {
   font-size: 12px;
 }
 
+.tbl_calendar td {
+  cursor: pointer;
+}
+
 .all {
   border-radius: 15px 0 0 0;
 }
@@ -512,31 +517,32 @@ tbody td:last-child .saturday {
 }
 
 /* DayComponent */
-.weekComponentBox {
+.dayComponentBox {
   background-color: white;
   width: 90%;
   margin-left: 5%;
   border: 1px solid #e5e5e5;
+  text-align: left;
 }
-.weekComponentBox .day_calendar_title {
-  margin-top: 10px;
+.dayComponentBox .day_calendar_title {
+  margin-top: 0;
   display: flex;
   background-color: rgb(250, 249, 248);
   text-align: left;
   align-items: center;
   height: 60px;
 }
-.weekComponentBox .day_calendar_title .day_blank {
+.dayComponentBox .day_calendar_title .day_blank {
   width: 80px;
 }
-.weekComponentBox .day_calendar_title .day_title {
+.dayComponentBox .day_calendar_title .day_title {
   font-size: 20px;
   display: flex;
 }
-.weekComponentBox .day_calendar_title .day_title .day_current {
+.dayComponentBox .day_calendar_title .day_title .day_current {
   margin-right: 5px;
 }
-.weekComponentBox .day_calendar_title .day_title .day_today {
+.dayComponentBox .day_calendar_title .day_title .day_today {
   background-color: rgb(18, 93, 230);
   color: white;
   border-radius: 50%;
@@ -546,7 +552,7 @@ tbody td:last-child .saturday {
   justify-content: center;
   display: flex;
 }
-.weekComponentBox .day_calendar1 {
+.dayComponentBox .day_calendar1 {
   margin-top: 0;
   display: flex;
   box-sizing: content-box;
@@ -558,13 +564,13 @@ tbody td:last-child .saturday {
   text-align: left;
   align-items: center;
 }
-.weekComponentBox .day_calendar1 .allDay {
+.dayComponentBox .day_calendar1 .allDay {
   width: 80px;
   text-align: center;
   align-items: center;
   font-size: 0.8em;
 }
-.weekComponentBox .day_calendar1 .container1 {
+.dayComponentBox .day_calendar1 .container1 {
   display: flex;
   justify-content: flex-start;
   border: 1px solid #e5e5e5;
@@ -573,15 +579,15 @@ tbody td:last-child .saturday {
   width: 90%;
   height: 80px;
 }
-.weekComponentBox .day_calendar1 .container1 .items {
+.dayComponentBox .day_calendar1 .container1 .items {
   flex-direction: column;
   width: 100%;
   height: 60px;
   padding-left: 10px;
   display: flex;
-  align-items: center;
+  align-items: left;
 }
-.weekComponentBox .day_calendar1 .container1 .items .allDayItem {
+.dayComponentBox .day_calendar1 .container1 .items .allDayItem {
   background-color: #eaedf1;
   margin-top: 5px;
   margin-right: 5px;
@@ -589,7 +595,7 @@ tbody td:last-child .saturday {
   width: 100%;
   height: 30px;
 }
-.weekComponentBox .day_calendar2 {
+.dayComponentBox .day_calendar2 {
   margin-top: 0;
   box-sizing: content-box;
   display: flex;
@@ -599,142 +605,233 @@ tbody td:last-child .saturday {
   background-color: inherit;
   height: 100%;
 }
-.weekComponentBox .day_calendar2 .timeLine {
+.dayComponentBox .day_calendar2 .timeLine {
   width: 80px;
   color: #979da5;
   height: 100%;
   font-size: 11px;
 }
-.weekComponentBox .day_calendar2 .timeLine .timeBox {
+.dayComponentBox .day_calendar2 .timeLine .timeBox {
   padding-left: 10%;
   font-size: 15px;
   border: 1px solid #e5e5e5;
   display: flex;
   align-items: center;
-  text-align: center;
+  text-align: right;
   vertical-align: center;
   padding-left: 10%;
 }
-.weekComponentBox .day_calendar2 .timeLine .timeBox #times {
+.dayComponentBox .day_calendar2 .timeLine .timeBox #times {
   height: 50px;
 }
-.weekComponentBox .day_calendar2 .timeLine .blankTime {
+.dayComponentBox .day_calendar2 .timeLine .blankTime {
   height: 30px;
   border: 1px solid #e5e5e5;
 }
-.weekComponentBox .day_calendar2 .schedule_container {
+.dayComponentBox .day_calendar2 .schedule_container {
   height: 100%;
   width: 90%;
 }
-.weekComponentBox .day_calendar2 .schedule_container .time_schedule {
+.dayComponentBox .day_calendar2 .schedule_container .time_schedule {
   width: 100%;
 }
-.weekComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container {
+.dayComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container {
   height: 100px;
   padding-left: 10%;
   border: 1px solid #70767f;
   align-items: center;
   padding-left: 10%;
 }
-.weekComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container .schedule1 {
+.dayComponentBox .day_calendar2 .schedule_container .time_schedule .schedule_container .schedule1 {
   height: 50px;
   width: 100%;
-  border-bottom: 1px solid #70767f;
+  border-bottom: 1px solid #e5e5e5;
 }
-.weekComponentBox .day_calendar2 .schedule_container .time_schedule .before30m {
+.dayComponentBox .day_calendar2 .schedule_container .time_schedule .before30m {
   font-size: 0.8em;
   border-bottom: dotted 1px #979da5;
   height: 25px;
   width: 100%;
 }
-.weekComponentBox .day_calendar2 .schedule_container .time_schedule .after30m {
+.dayComponentBox .day_calendar2 .schedule_container .time_schedule .after30m {
   font-size: 0.8em;
   height: 25px;
-  border-bottom: 1px solid #70767f;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 /*WeekComponent*/
-.contentCalendar {
+.weekComponentBox {
   background-color: white;
+  width: 90%;
+  margin-left: 5%;
+  border: 1px solid #e5e5e5;
   height: 100%;
-  position: relative;
-  box-sizing: border-box;
 }
-.contentCalendar .weekContainer {
-  font-size: 20px;
-  border-top: 1px solid rgb(229, 229, 229);
-  border-bottom: 1px solid rgb(237, 235, 232);
-  height: 40px;
-  background-color: inherit;
+.weekComponentBox .weekContainer {
+  margin-top: 0;
+  background-color: rgb(250, 249, 248);
+  height: 50px;
+  font-size: 18px;
   text-align: left;
 }
-.contentCalendar .weekContainer .weekContents {
+.weekComponentBox .weekContainer .weekContents {
   margin-left: 88px;
   box-sizing: border-box;
   display: flex;
 }
-.contentCalendar .weekContainer .weekContents .weekendSun {
-  border: solid 1px #edebe8;
+.weekComponentBox .weekContainer .weekContents .weekendSun {
+  border: 1px solid #e5e5e5;
   width: 8.3333333333%;
   left: 0%;
-  line-height: 41px;
-  border-left: solid 1px #edebe8;
+  line-height: 50px;
+  border-left: 1px solid #e5e5e5;
   padding-left: 0;
 }
-.contentCalendar .weekContainer .weekContents .weekdays {
+.weekComponentBox .weekContainer .weekContents .weekdays {
   width: 16.6666666667%;
-  line-height: 41px;
-  border: solid 1px #edebe8;
+  left: 8.3333333333%;
+  line-height: 50px;
+  border: 1px solid #e5e5e5;
   padding-left: 0;
 }
-.contentCalendar .weekContainer .weekContents .weekendSat {
+.weekComponentBox .weekContainer .weekContents .weekendSat {
   width: 8.3333333333%;
   left: 91.6666666667%;
-  line-height: 41px;
-  border: solid 1px #edebe8;
+  line-height: 50px;
+  border: 1px solid #e5e5e5;
   padding-left: 0;
 }
-.contentCalendar .allDayScheduleBox {
-  height: 93px;
-}
-.contentCalendar .allDayScheduleBox .allDayTitle {
-  border-right: 1px solid #e5e5e5;
-  width: 88px;
+.weekComponentBox .allDayScheduleBox {
+  margin-top: 0;
+  display: flex;
+  box-sizing: content-box;
+  border: 1px solid #e5e5e5;
+  border-bottom: none !important;
+  height: 80px;
+  width: 100%;
   background-color: inherit;
-  padding-right: 12px;
+  text-align: left;
+  align-items: center;
 }
-.contentCalendar .calendarContainer {
+.weekComponentBox .allDayScheduleBox .allDay {
+  width: 80px;
+  text-align: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+.weekComponentBox .allDayScheduleBox .allDayBox {
+  border: 1px solid #e5e5e5;
+}
+.weekComponentBox .allDayScheduleBox .allDayBox .allDayFlexBox {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e5e5e5;
+}
+.weekComponentBox .calendarContainer {
+  margin-top: 0;
+  box-sizing: content-box;
+  display: flex;
+  border: 1px solid #e5e5e5;
+  border-collapse: collapse;
+  border-left: none !important;
+  background-color: inherit;
   height: 100%;
-  position: relative;
 }
-.contentCalendar .calendarContainer .timeZone {
-  width: 88px;
+.weekComponentBox .calendarContainer .timeLine {
+  width: 80px;
   color: #979da5;
+  height: 100%;
   font-size: 11px;
 }
-.contentCalendar .calendarContainer .timeZone .timeBox {
+.weekComponentBox .calendarContainer .timeLine .timeBox {
   padding-left: 10%;
   font-size: 15px;
-  border: solid 1px #edebe8;
+  border: 1px solid #e5e5e5;
   display: flex;
   align-items: center;
-  text-align: center;
+  text-align: right;
   vertical-align: center;
   padding-left: 10%;
 }
-.contentCalendar .calendarContainer .timeZone .timeBox #times {
+.weekComponentBox .calendarContainer .timeLine .timeBox #times {
   height: 50px;
 }
-.contentCalendar .calendarContainer .timeZone .blankTime {
+.weekComponentBox .calendarContainer .timeLine .blankTime {
   height: 30px;
-  border: solid 1px #edebe8;
+  border: 1px solid #e5e5e5;
 }
-.contentCalendar .calendarContainer .weekSchedule {
-  border: solid 1px #edebe8;
-  height: 672px;
-  position: relative;
+.weekComponentBox .calendarContainer .schedule_container {
+  height: 100%;
+  width: 90%;
+}
+.weekComponentBox .calendarContainer .schedule_container .time_schedule {
+  width: 100%;
+}
+.weekComponentBox .calendarContainer .schedule_container .time_schedule .schedule_container {
+  height: 100px;
+  padding-left: 10%;
+  border: 1px solid #70767f;
+  align-items: center;
+  padding-left: 10%;
+}
+.weekComponentBox .calendarContainer .schedule_container .time_schedule .schedule_container .schedule1 {
+  height: 50px;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+}
+.weekComponentBox .calendarContainer .schedule_container .time_schedule .before30m {
+  font-size: 0.8em;
+  border-bottom: dotted 1px #979da5;
+  height: 25px;
+  width: 100%;
+}
+.weekComponentBox .calendarContainer .schedule_container .time_schedule .after30m {
+  font-size: 0.8em;
+  height: 25px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.weekComponentBox .calendarContainer .weekSchedule {
+  border: 1px solid #e5e5e5;
 }
 
-.select_term {
-  margin-bottom: 5px;
+.modalBox {
+  background-color: white;
+  height: 300px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border: 1px solid #e5e5e5;
+}
+.modalBox .dateTitle {
+  font-size: 30px;
+  color: 1px solid #70767f;
+  margin-left: 5%;
+  margin-bottom: 10px;
+}
+.modalBox .dateTitle #dateTitleId {
+  color: black;
+}
+.modalBox .inputTitle {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 32px;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.modalBox .inputTitle #inputTitleId {
+  outline: none;
+}
+.modalBox .inputName {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.modalBox .inputContent {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.modalBox .buttonContainer {
+  margin-top: 5%;
+  margin-left: 40%;
+}
+.modalBox .buttonContainer .submitBtn {
+  margin-right: 5px;
 }/*# sourceMappingURL=index.css.map */

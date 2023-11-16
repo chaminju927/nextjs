@@ -37,3 +37,17 @@ export type calendarType = {
   day: string;
   isToday: boolean;
 };
+
+//schedule data type
+export type scheduleType = {
+  key: string;
+  contents: string;
+  date: string;
+};
+
+export type scheduleInputType = {
+  title?: string;
+  name?: string;
+  date?: string;
+  content?: string;
+};

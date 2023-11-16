@@ -14,26 +14,61 @@ function WeekComponent({
   dayConverter: dayType;
 }): JSX.Element {
   const [weekRow, setWeekRow] = useState<weekTitleType[]>([]);
-
+  const [flexBox, setFlexBox] = useState<any[]>([]);
+  const scheduleRow: JSX.Element[] = [];
   // 1주일 제목 출력
   const drawWeek: voidFnType = () => {
     var weekTitle: weekTitleType[] = [];
     for (let i = 0; i < 7; i++) {
       weekTitle.push({
-        className: i === 0 ? "weekdays" : i === 6 ? "weekendSat" : "weekdays",
+        className: i === 0 ? "weekendSun" : i === 6 ? "weekendSat" : "weekdays",
         date: moment(today).startOf("week").add(i, "days"),
         day: dayConverter(moment(today).startOf("week").add(i, "days").day()),
       });
     }
     setWeekRow(weekTitle);
   };
+  //주간 종일 일정 박스
+  const drawAllDaySchedules = () => {
+    const scheduleBoxes = [];
+    for (let i = 0; i < 7; i++) {
+      scheduleBoxes.push({
+        className: "allDayFlexBox",
+        id: i,
+      });
+    }
+    setFlexBox(scheduleBoxes);
+  };
+  //타임라인 기본 틀 생성
+  const timeSchedule = () => {
+    for (
+      let i = 0;
+      i < 24;
+      i++ // let time = startTime; // time.isSameOrBefore(endTime) ; // time.add(30, "minutes")
+    ) {
+      scheduleRow.push(
+        <div className="time_schedule" key={i}>
+          {/* {time.format("HH:mm") === schedule.start ? ( */}
+          <div className="before30m">
+            <div className="schedule1">
+              {/* {schedule.start}: {schedule.detail} */}
+            </div>
+          </div>
+          <div className="after30m">
+            <div></div>
+          </div>
+        </div>
+      );
+    }
+    return scheduleRow;
+  };
 
   useEffect(() => {
     drawWeek();
-    // console.log(dayConverter(0));
-  }, []);
+    drawAllDaySchedules();
+  }, [flexBox]);
   return (
-    <div className="contentCalendar">
+    <div className="weekComponentBox">
       <div className="weekContainer">
         <div className="weekContents">
           {weekRow.map((data, index) => (
@@ -46,14 +81,20 @@ function WeekComponent({
         </div>
       </div>
       <div className="allDayScheduleBox">
-            <div className="allDayTitle">종일</div>
-            <div className="allDaySchedules"></div>
+        <div className="allDay">종일</div>
+        <div className="allDayBox">
+          {flexBox.map((data) => (
+            <div key={data.i} className={data.className}>
+              <span></span>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="calendarContainer">
-        <div className="timeZone">
+        <div className="timeLine">
           <TimelineComponent />
         </div>
-        <div className="weekSchedule"></div>
+        <div className="schedule_container">{timeSchedule()}</div>
       </div>
     </div>
   );

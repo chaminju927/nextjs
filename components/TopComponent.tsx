@@ -56,12 +56,14 @@ function TopComponent(): JSX.Element {
     const prev = moment(current).subtract(1, "month");
     setCurrent(prev);
     setCurrentString(prev.format("YYYY.MM"));
+    console.log(prev);
   };
   // 다음달 이동
   const nextMonth: voidFnType = () => {
-    const next = current;
-    setCurrent(moment(next).add(1, "month"));
-    setCurrentString(current.format("YYYY.MM"));
+    const next = moment(current).add(1, "month");
+    setCurrent(next);
+    setCurrentString(next.format("YYYY.MM"));
+    console.log(next);
   };
 
   const selectMonthType: JSXType = () => {
