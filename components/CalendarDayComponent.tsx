@@ -12,15 +12,22 @@ function CalendarDayComponent({ dayConverter }: { dayConverter: dayType }) {
     return stringDays;
   }, [dayConverter]);
 
+  // useEffect(() => {
+  //   console.log(thDays);
+  // }, []);
+
   return (
     <>
       <thead>
         <tr>
           <th className="all">전체</th>
           {thDays.map((data: any, index: number) => {
-            <th className={data.class} key={index}>
-              {data.converted}
-            </th>;
+            <>
+              <th className={data.class} key={index}>
+                {data.converted}
+              </th>
+              ;
+            </>;
           })}
           <th className="sun">일요일</th>
           <th>월요일</th>

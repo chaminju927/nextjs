@@ -98,7 +98,6 @@ function TopComponent(): JSX.Element {
       </div>
     );
   };
-
   // selectbox 콜백함수
   const getDateFn = (value: string) => {
     setRenderType(value);

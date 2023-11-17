@@ -67,7 +67,7 @@ function MonthComponent({
       var jsonSchedule = storage.getItem(data.key);
       var parsedSchedule = JSON.parse(jsonSchedule!);
     }
-    console.log(parsedSchedule);
+    // console.log(parsedSchedule);
     return parsedSchedule;
   };
 
@@ -77,6 +77,18 @@ function MonthComponent({
     setPropsKey(keyName);
     setIsModalOpen(true);
   };
+  const renderSchedule = () => {
+    return getData() ? (
+      <div>
+        <span className="schedule-title">{getData().title}</span>
+        <span className="schedule-name">{getData().name}</span>
+        <span className="schedule-content">{getData().content}</span>
+      </div>
+    ) : (
+      <div className="no-schedule"></div>
+    );
+  };
+
   return (
     <div>
       <div className="tbl_calendar">
@@ -103,6 +115,7 @@ function MonthComponent({
                       </span>
 
                       <div className="scheduleBox">
+                        {renderSchedule()}
                         {/* {(() => {
                           const storedSchedule =
                             typeof window !== undefined
@@ -111,9 +124,9 @@ function MonthComponent({
                           const parsedSchedule = storedSchedule
                             ? JSON.parse(storedSchedule)
                             : null; */}
-                        {/* {parsedSchedule ? (
-                          return
-                          <>
+                        {/* {getData() ? (
+                         
+                          
                         <div>
                           <span className="schedule-title">
                             {getData().title}
@@ -126,7 +139,7 @@ function MonthComponent({
                           </span>
                         </div>
                         ) : (<div className="no-schedule"></div>
-                        </>
+                        
                         );
 } */}
                         {/* })()} */}
