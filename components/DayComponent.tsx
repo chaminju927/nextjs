@@ -12,16 +12,24 @@ function DayComponent({
 }: {
   dayConverter: dayType;
 }): JSX.Element {
+  const storage = window.localStorage;
   const scheduleRow: JSX.Element[] = [];
   const dateFormat = today.format("DD").startsWith("0")
     ? today.format("D")
     : today.format("DD");
+
   // 종일 일정 데이터 예시
-  const allDaySchedule = [
-    // { className: "item", data: "[차민주] 오후 반차" },
-    { className: "allDayItem", data: "[차민주] 연차 휴가" },
-    { className: "allDayItem", data: "[차민주] 오후 반차" },
-  ];
+  // const allDaySchedule = [
+  //   // { className: "item", data: "[차민주] 오후 반차" },
+  //   { className: "allDayItem", data: "[차민주] 연차 휴가" },
+  //   { className: "allDayItem", data: "[차민주] 오후 반차" },
+  // ];
+  const scheduleData =
+    typeof window !== undefined
+      ? storage.getItem(today.format("YY.MM.DD"))
+      : null;
+  
+  const allDaySchedule = [{ className: "allDayItem", data: scheduleData }];
 
   //일정 데이터 예시
   let schedule = {

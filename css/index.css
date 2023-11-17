@@ -433,14 +433,14 @@ tr {
   margin-left: 5%;
   margin-top: 5px;
 }
-
 .tbl_calendar table {
+  word-break: break-all;
+  table-layout: fixed;
   border-radius: 15px 0 0 0 !important;
   width: 90%;
   background-color: white;
   border-collapse: collapse;
 }
-
 .tbl_calendar th {
   background: #363a54;
   color: #fff;
@@ -450,23 +450,38 @@ tr {
   padding: 6px;
   font-size: 12px;
 }
-
-.tbl_calendar td {
-  cursor: pointer;
-}
-
-.all {
-  border-radius: 15px 0 0 0;
-}
-
 .tbl_calendar th:nth-child(2) {
   /* border-radius: 15px 0 0 0; */
   color: #ff0000;
 }
-
 .tbl_calendar th:last-child {
   border-radius: 0 15px 0 0;
   color: #85e3df;
+}
+.tbl_calendar td.sun {
+  background: #363a54;
+  color: #ff0000;
+}
+.tbl_calendar td {
+  table-layout: fixed;
+  border-bottom: 1px solid #eaedf1;
+  border-right: 1px solid #eaedf1;
+  color: #70767f;
+  height: 100px;
+  cursor: pointer;
+}
+.tbl_calendar td > div {
+  color: #70767f;
+  height: 100%;
+  padding: 5px;
+}
+.tbl_calendar .scheduleBox {
+  background-color: rgba(211, 247, 244, 0.4666666667);
+  word-break: break-word;
+}
+
+.all {
+  border-radius: 15px 0 0 0;
 }
 
 tbody td:nth-child(2) .sunday {
@@ -475,24 +490,6 @@ tbody td:nth-child(2) .sunday {
 
 tbody td:last-child .saturday {
   color: #2497cf;
-}
-
-.tbl_calendar td.sun {
-  background: #363a54;
-  color: #ff0000;
-}
-
-.tbl_calendar td {
-  border-bottom: 1px solid #eaedf1;
-  border-right: 1px solid #eaedf1;
-  color: #70767f;
-  height: 100px;
-}
-
-.tbl_calendar td > div {
-  color: #70767f;
-  height: 100%;
-  padding: 5px;
 }
 
 .other-month {

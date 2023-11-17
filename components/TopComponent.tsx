@@ -12,7 +12,6 @@ import { JSXType, dayType, voidFnType } from "../types/common";
 import SelectDateComponent from "./SelectDateComponent";
 
 const now = moment();
-const today = now;
 // 요일 변환
 const dayConverter: dayType = (no: number) => {
   switch (no) {
@@ -100,6 +99,7 @@ function TopComponent(): JSX.Element {
     );
   };
 
+  // selectbox 콜백함수
   const getDateFn = (value: string) => {
     setRenderType(value);
   };
@@ -109,7 +109,7 @@ function TopComponent(): JSX.Element {
       <div>
         {selectMonthType()}
         <SelectDateComponent getDate={getDateFn} />
-        <MonthComponent current={current} />
+        <MonthComponent current={current} dayConverter={dayConverter} />
       </div>
     );
   } else if (renderType === "week") {

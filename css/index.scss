@@ -575,38 +575,60 @@ $border: 1px solid #70767f;
   // border-bottom: 1px solid rgb(54 58 84 / 60%);
   margin-left: 5%;
   margin-top: 5px;
-}
-.tbl_calendar table {
-  border-radius: 15px 0 0 0 !important;
-  width: 90%;
-  background-color: white;
-  border-collapse: collapse;
+  table {
+    word-break: break-all;
+    table-layout: fixed;
+    border-radius: 15px 0 0 0 !important;
+    width: 90%;
+    background-color: white;
+    border-collapse: collapse;
+  }
+  th {
+    background: #363a54;
+    color: #fff;
+    text-align: center;
+    border-right: 1px solid #979da5;
+    border-bottom: 1px solid #fff;
+    padding: 6px;
+    font-size: 12px;
+  }
+  th:nth-child(2) {
+    /* border-radius: 15px 0 0 0; */
+    color: #ff0000;
+  }
+
+  th:last-child {
+    border-radius: 0 15px 0 0;
+    color: #85e3df;
+  }
+  td.sun {
+    background: #363a54;
+    color: #ff0000;
+  }
+
+  td {
+    //word-break: normal;
+    table-layout: fixed;
+    border-bottom: 1px solid #eaedf1;
+    border-right: 1px solid #eaedf1;
+    color: #70767f;
+    height: 100px;
+    cursor: $pointer;
+  }
+
+  td > div {
+    color: #70767f;
+    height: 100%;
+    padding: 5px;
+  }
+  .scheduleBox {
+    background-color: #d3f7f477;
+    word-break: break-word;
+  }
 }
 
-.tbl_calendar th {
-  background: #363a54;
-  color: #fff;
-  text-align: center;
-  border-right: 1px solid #979da5;
-  border-bottom: 1px solid #fff;
-  padding: 6px;
-  font-size: 12px;
-}
-.tbl_calendar td {
-  cursor: $pointer;
-}
 .all {
   border-radius: 15px 0 0 0;
-}
-
-.tbl_calendar th:nth-child(2) {
-  /* border-radius: 15px 0 0 0; */
-  color: #ff0000;
-}
-
-.tbl_calendar th:last-child {
-  border-radius: 0 15px 0 0;
-  color: #85e3df;
 }
 
 tbody td:nth-child(2) .sunday {
@@ -614,24 +636,6 @@ tbody td:nth-child(2) .sunday {
 }
 tbody td:last-child .saturday {
   color: #2497cf;
-}
-
-.tbl_calendar td.sun {
-  background: #363a54;
-  color: #ff0000;
-}
-
-.tbl_calendar td {
-  border-bottom: 1px solid #eaedf1;
-  border-right: 1px solid #eaedf1;
-  color: #70767f;
-  height: 100px;
-}
-
-.tbl_calendar td > div {
-  color: #70767f;
-  height: 100%;
-  padding: 5px;
 }
 
 .other-month {
@@ -833,7 +837,6 @@ tbody td:last-child .saturday {
     margin-left: 5%;
     margin-right: 5%;
     #inputNameId {
-      
     }
   }
   .inputContent {

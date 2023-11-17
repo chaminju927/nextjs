@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import moment from "moment";
-import { voidFnType } from "@/types/common";
+import { dayType, voidFnType } from "@/types/common";
 import ScheduleModalComponent from "./ScheduleModalComponent";
+import CalendarDayComponent from "./CalendarDayComponent";
 
-const storage = window.localStorage;
+function MonthComponent({
+  current,
+  dayConverter,
+}: {
+  current: moment.Moment;
+  dayConverter: dayType;
+}): JSX.Element {
+  const storage = window.localStorage;
 
-function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
-  const [calendar, setCalendar] = useState<any[]>([]);
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
   const firstDayOfMonth = moment(current).startOf("month").startOf("week");
   // 이번달 첫 주
@@ -21,11 +27,10 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
   const [propsKey, setPropsKey] = useState<string>("");
   //스케쥴 입력 모달창
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
-  const drawTable: voidFnType = useCallback(() => {
+  const data: any = useMemo(() => {
     const newCalendar = [];
     for (let week = firstWeek; week <= lastWeek; week++) {
       const weekRow = [];
@@ -51,42 +56,35 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
       }
       newCalendar.push({ week: week, weekRow: weekRow });
     }
-    setCalendar(newCalendar);
+    return newCalendar;
   }, [current, firstDayOfMonth, firstWeek, lastWeek]);
-
-  useEffect(() => {
-    drawTable();
-  }, [current, storage]);
 
   const closeModal: voidFnType = () => {
     setIsModalOpen(false);
   };
+  const getData = () => {
+    if (typeof window !== undefined && storage) {
+      var jsonSchedule = storage.getItem(data.key);
+      var parsedSchedule = JSON.parse(jsonSchedule!);
+    }
+    console.log(parsedSchedule);
+    return parsedSchedule;
+  };
 
-  // 날짜 클릭시 모달 오픈
+  // 날짜 클릭시 스케쥴 생성 모달 오픈
   const makeSchedule = (e: React.MouseEvent) => {
     const keyName = e.currentTarget.id;
     setPropsKey(keyName);
-    console.log(keyName);
     setIsModalOpen(true);
   };
   return (
     <div>
       <div className="tbl_calendar">
         <table>
-          <thead>
-            <tr>
-              <th className="all">전체</th>
-              <th className="sun">일요일</th>
-              <th>월요일</th>
-              <th>화요일</th>
-              <th>수요일</th>
-              <th>목요일</th>
-              <th>금요일</th>
-              <th>토요일</th>
-            </tr>
-          </thead>
-          <tbody id="FlexCalendar">
-            {calendar.map((week: any) => (
+          {/* thead component 분리 */}
+          <CalendarDayComponent dayConverter={dayConverter} />
+          <tbody>
+            {data.map((week: any) => (
               <tr key={week.week}>
                 {week.weekRow.map((day: any) => (
                   <td
@@ -103,58 +101,41 @@ function MonthComponent({ current }: { current: moment.Moment }): JSX.Element {
                       <span className={day.isToday ? "today" : ""} id={day.id}>
                         {day.day}
                       </span>
-                      {/* 여기에 수정된 부분 */}
-                      {day.schedule ? (
-                        <div className="schedule-container">
-                          <div className="schedule-title">
-                            {day.schedule.title}
-                          </div>
-                          <div className="schedule-name">
-                            {day.schedule.name}
-                          </div>
-                          <div className="schedule-content">
-                            {day.schedule.content}
-                          </div>
-                        </div>
-                      ) : (
-                        // day.schedule이 없으면 로컬 스토리지에서 데이터를 가져와서 표시
-                        <div className="schedule-container">
-                          {(() => {
-                            const storedSchedule = storage.getItem(day.key);
-                            const parsedSchedule = storedSchedule
-                              ? JSON.parse(storedSchedule)
-                              : null;
 
-                            return parsedSchedule ? (
-                              <>
-                                <div className="schedule-title">
-                                  {parsedSchedule.title}
-                                </div>
-                                <div className="schedule-name">
-                                  {parsedSchedule.name}
-                                </div>
-                                <div className="schedule-content">
-                                  {parsedSchedule.content}
-                                </div>
-                              </>
-                            ) : (
-                              // 저장된 데이터가 없을 경우 표시할 내용
-                              <div className="no-schedule"></div>
-                            );
-                          })()}
+                      <div className="scheduleBox">
+                        {/* {(() => {
+                          const storedSchedule =
+                            typeof window !== undefined
+                              ? storage.getItem(day.key)
+                              : null;
+                          const parsedSchedule = storedSchedule
+                            ? JSON.parse(storedSchedule)
+                            : null; */}
+                        {/* {parsedSchedule ? (
+                          return
+                          <>
+                        <div>
+                          <span className="schedule-title">
+                            {getData().title}
+                          </span>
+                          <span className="schedule-name">
+                            {getData().name}
+                          </span>
+                          <span className="schedule-content">
+                            {getData().content}
+                          </span>
                         </div>
-                      )}
+                        ) : (<div className="no-schedule"></div>
+                        </>
+                        );
+} */}
+                        {/* })()} */}
+                      </div>
                     </div>
                   </td>
                 ))}
               </tr>
             ))}
-
-            {/* </div>
-                  </td>
-                ))}
-              </tr>
-            ))} */}
           </tbody>
           <ScheduleModalComponent
             isOpen={isModalOpen}
