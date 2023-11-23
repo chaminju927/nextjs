@@ -1,10 +1,11 @@
-import MonthComponent from "@/components/MonthComponent";
 import TopComponent from "@/components/TopComponent";
 
 export default function Page(): JSX.Element {
   return (
-    <div>
+    <>
+      {/* <Suspense fallback={<Loading />}> */}
       <TopComponent />
-    </div>
+      {/* </Suspense> */}
+    </>
   );
 }

@@ -35,7 +35,6 @@ function MainTableComponent({
   const [deleteNo, setDeleteNo] = useState<number>();
 
   const mutation = useMutation({
-    //useMutation은 자동실행안되므로 disable필요X
     mutationFn: deleteData,
     onError: (error) => {
       console.log(error);

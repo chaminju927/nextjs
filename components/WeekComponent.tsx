@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useMemo, useState, useEffect } from "react";
+import {
+  useCallback,
+  useMemo,
+  useState,
+  useEffect,
+  SetStateAction,
+} from "react";
 import moment from "moment";
 import { weekTitleType, voidFnType, dayType } from "@/types/common";
 import TimelineComponent from "./TimelineComponent";
@@ -16,8 +22,9 @@ function WeekComponent({
   const [weekRow, setWeekRow] = useState<weekTitleType[]>([]);
   const [flexBox, setFlexBox] = useState<any[]>([]);
   const scheduleRow: JSX.Element[] = [];
+
   // 1주일 제목 출력
-  const drawWeek: voidFnType = () => {
+  const drawWeek: React.Dispatch<React.SetStateAction<string>> = () => {
     var weekTitle: weekTitleType[] = [];
     for (let i = 0; i < 7; i++) {
       weekTitle.push({
@@ -28,6 +35,7 @@ function WeekComponent({
     }
     setWeekRow(weekTitle);
   };
+
   //주간 종일 일정 박스
   const drawAllDaySchedules = () => {
     const scheduleBoxes = [];
@@ -63,10 +71,6 @@ function WeekComponent({
     return scheduleRow;
   };
 
-  useEffect(() => {
-    drawWeek();
-    drawAllDaySchedules();
-  }, [flexBox]);
   return (
     <div className="weekComponentBox">
       <div className="weekContainer">

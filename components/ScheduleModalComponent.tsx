@@ -3,7 +3,6 @@
 import { scheduleInputType, voidFnType } from "@/types/common";
 import Modal from "@mui/material/Modal";
 import React, { useEffect, useState, useCallback } from "react";
-import DateInputComponent from "../../moffice-front/src/components/DateInputComponent";
 
 // modal style
 const style = {
@@ -15,12 +14,10 @@ const style = {
   width: 550,
   height: 300,
   bgcolor: "transparent",
-  //border: "1px solid #e5e5e5",
   boxShadow: 0,
   p: 0,
 };
-const storage = window.localStorage;
-
+//const storage = window.localStorage;
 function ScheduleModalComponent({
   isOpen,
   closeModal,
@@ -29,7 +26,7 @@ function ScheduleModalComponent({
   isOpen: any;
   closeModal: voidFnType;
   propsKey: string;
-}) {
+}): JSX.Element {
   const [input, setInput] = useState<scheduleInputType>();
 
   const titleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +36,7 @@ function ScheduleModalComponent({
       title: titleContent,
     });
   };
+
   const nameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput({
       ...input,
@@ -51,18 +49,20 @@ function ScheduleModalComponent({
       content: e.currentTarget.value,
     });
   };
+  // 모달창 닫기
   const cancel = () => {
     closeModal();
   };
-  //확인 버튼 (데이터 입력)
-  const submitBtn = (e: React.MouseEvent) => {
+  // 확인 버튼 (데이터 입력)
+  const submitBtn = () => {
     setInput({
       ...input,
       date: propsKey,
     });
-    storage.setItem(`${propsKey}`, JSON.stringify(input));
-    console.log(storage.getItem(`${propsKey}`));
-    closeModal();
+    if (typeof window !== undefined) {
+      window.localStorage.setItem(`${propsKey}`, JSON.stringify(input));
+    }
+    cancel();
   };
   const renderTitle = () => {
     return (
@@ -111,7 +111,7 @@ function ScheduleModalComponent({
   };
 
   return (
-    <div>
+    <>
       <Modal open={isOpen} onClose={closeModal} sx={style}>
         <div className="modalBox">
           {renderTitle()}
@@ -120,7 +120,7 @@ function ScheduleModalComponent({
           {renderBtn()}
         </div>
       </Modal>
-    </div>
+    </>
   );
 }
 export default ScheduleModalComponent;

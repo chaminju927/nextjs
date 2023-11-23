@@ -37,6 +37,8 @@ body .container .header-container .floatL {
 body .container .header-container .floatL .notice {
   padding: 1px 5px;
   background-color: #363a54;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   color: #fff;
   font-size: 11px;
@@ -200,6 +202,8 @@ a.btns {
   height: 28px;
   margin-left: 5px;
   padding: 0 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
   color: #fff;
   font-size: 12px;
@@ -227,7 +231,11 @@ input {
   height: 26px;
   padding: 3px 10px 4px;
   border: 1px solid #cfd3de;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -374,8 +382,7 @@ tr {
   margin-bottom: 50px;
 }
 #sideBar .sideBox {
-  -webkit-text-decoration: "none";
-          text-decoration: "none";
+  text-decoration: "none";
   text-decoration-color: #363a54;
   display: flex;
   height: 60px;
@@ -413,6 +420,8 @@ tr {
   height: 24px;
   display: inline-block;
   border: 1px solid #cfd3de;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
   text-indent: -9999em;
 }
@@ -421,6 +430,8 @@ tr {
   height: 24px;
   display: inline-block;
   border: 1px solid #cfd3de;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
   border-radius: 50%;
   text-indent: -9999em;
 }
@@ -584,14 +595,6 @@ tbody td:last-child .saturday {
   display: flex;
   align-items: left;
 }
-.dayComponentBox .day_calendar1 .container1 .items .allDayItem {
-  background-color: #eaedf1;
-  margin-top: 5px;
-  margin-right: 5px;
-  font-size: 0.8em;
-  width: 100%;
-  height: 30px;
-}
 .dayComponentBox .day_calendar2 {
   margin-top: 0;
   box-sizing: content-box;
@@ -619,7 +622,7 @@ tbody td:last-child .saturday {
   padding-left: 10%;
 }
 .dayComponentBox .day_calendar2 .timeLine .timeBox #times {
-  height: 50px;
+  height: 25px;
 }
 .dayComponentBox .day_calendar2 .timeLine .blankTime {
   height: 30px;
@@ -751,7 +754,7 @@ tbody td:last-child .saturday {
   padding-left: 10%;
 }
 .weekComponentBox .calendarContainer .timeLine .timeBox #times {
-  height: 50px;
+  height: 25px;
 }
 .weekComponentBox .calendarContainer .timeLine .blankTime {
   height: 30px;
@@ -831,4 +834,4 @@ tbody td:last-child .saturday {
 }
 .modalBox .buttonContainer .submitBtn {
   margin-right: 5px;
-}/*# sourceMappingURL=index.css.map */
+}

@@ -45,9 +45,20 @@ export type scheduleType = {
   date: string;
 };
 
+// 모달에서 입력받는 데이터 타입
 export type scheduleInputType = {
   title?: string;
   name?: string;
   date?: string;
   content?: string;
 };
+
+// export type calendarType = {
+//   week: number;
+//   weekRow: {
+//     key: string;
+//     className: string;
+//     day?: string;
+//     isToday?: boolean;
+//   };
+// };

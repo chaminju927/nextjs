@@ -1,5 +1,5 @@
 import { dayType } from "@/types/common";
-import { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 
 function CalendarDayComponent({ dayConverter }: { dayConverter: dayType }) {
   const thDays: any = useMemo(() => {
@@ -10,7 +10,7 @@ function CalendarDayComponent({ dayConverter }: { dayConverter: dayType }) {
       stringDays.push({ class: className, converted: convertedDay });
     }
     return stringDays;
-  }, [dayConverter]);
+  }, []);
 
   // useEffect(() => {
   //   console.log(thDays);
@@ -21,14 +21,13 @@ function CalendarDayComponent({ dayConverter }: { dayConverter: dayType }) {
       <thead>
         <tr>
           <th className="all">전체</th>
-          {thDays.map((data: any, index: number) => {
+          {/* {thDays.map((data: any, index: any) => {
             <>
               <th className={data.class} key={index}>
                 {data.converted}
               </th>
-              ;
             </>;
-          })}
+          })} */}
           <th className="sun">일요일</th>
           <th>월요일</th>
           <th>화요일</th>
@@ -41,4 +40,4 @@ function CalendarDayComponent({ dayConverter }: { dayConverter: dayType }) {
     </>
   );
 }
-export default CalendarDayComponent;
+export default React.memo(CalendarDayComponent);

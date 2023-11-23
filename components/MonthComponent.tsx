@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState, useCallback, useMemo } from "react";
+import { useState, useMemo } from "react";
 import moment from "moment";
-import { dayType, voidFnType } from "@/types/common";
+import { dayType, voidFnType, calendarType } from "@/types/common";
 import ScheduleModalComponent from "./ScheduleModalComponent";
 import CalendarDayComponent from "./CalendarDayComponent";
 
+//const storage = window.localStorage;
 function MonthComponent({
   current,
   dayConverter,
@@ -13,8 +14,6 @@ function MonthComponent({
   current: moment.Moment;
   dayConverter: dayType;
 }): JSX.Element {
-  const storage = window.localStorage;
-
   // 이번달 첫 주의 시작 일자(일요일=0 부터 시작)
   const firstDayOfMonth = moment(current).startOf("month").startOf("week");
   // 이번달 첫 주
@@ -62,13 +61,19 @@ function MonthComponent({
   const closeModal: voidFnType = () => {
     setIsModalOpen(false);
   };
+
   const getData = () => {
-    if (typeof window !== undefined && storage) {
-      var jsonSchedule = storage.getItem(data.key);
+    if (typeof window !== undefined) {
+      // for (let i = 0; i < data.length; i++) {
+      //   var index = data[i].key;
+
+      // }
+      var jsonSchedule = window.localStorage.getItem(data.key);
       var parsedSchedule = JSON.parse(jsonSchedule!);
+      return parsedSchedule;
+    } else {
+      return null;
     }
-    // console.log(parsedSchedule);
-    return parsedSchedule;
   };
 
   // 날짜 클릭시 스케쥴 생성 모달 오픈
@@ -77,23 +82,11 @@ function MonthComponent({
     setPropsKey(keyName);
     setIsModalOpen(true);
   };
-  const renderSchedule = () => {
-    return getData() ? (
-      <div>
-        <span className="schedule-title">{getData().title}</span>
-        <span className="schedule-name">{getData().name}</span>
-        <span className="schedule-content">{getData().content}</span>
-      </div>
-    ) : (
-      <div className="no-schedule"></div>
-    );
-  };
 
   return (
     <div>
       <div className="tbl_calendar">
         <table>
-          {/* thead component 분리 */}
           <CalendarDayComponent dayConverter={dayConverter} />
           <tbody>
             {data.map((week: any) => (
@@ -115,34 +108,21 @@ function MonthComponent({
                       </span>
 
                       <div className="scheduleBox">
-                        {renderSchedule()}
-                        {/* {(() => {
-                          const storedSchedule =
-                            typeof window !== undefined
-                              ? storage.getItem(day.key)
-                              : null;
-                          const parsedSchedule = storedSchedule
-                            ? JSON.parse(storedSchedule)
-                            : null; */}
-                        {/* {getData() ? (
-                         
-                          
-                        <div>
-                          <span className="schedule-title">
-                            {getData().title}
-                          </span>
-                          <span className="schedule-name">
-                            {getData().name}
-                          </span>
-                          <span className="schedule-content">
-                            {getData().content}
-                          </span>
-                        </div>
-                        ) : (<div className="no-schedule"></div>
-                        
-                        );
-} */}
-                        {/* })()} */}
+                        {getData() ? (
+                          <div>
+                            <span className="schedule-title">
+                              {getData().title}
+                            </span>
+                            <span className="schedule-name">
+                              {getData().name}
+                            </span>
+                            <span className="schedule-content">
+                              {getData().content}
+                            </span>
+                          </div>
+                        ) : (
+                          <div className="no-schedule"></div>
+                        )}
                       </div>
                     </div>
                   </td>

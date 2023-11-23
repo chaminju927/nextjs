@@ -2,7 +2,7 @@
 
 import moment from "moment";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import MonthComponent from "./MonthComponent";
+//import MonthComponent from "./MonthComponent";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -10,6 +10,12 @@ import DayComponent from "./DayComponent";
 import WeekComponent from "./WeekComponent";
 import { JSXType, dayType, voidFnType } from "../types/common";
 import SelectDateComponent from "./SelectDateComponent";
+import dynamic from "next/dynamic";
+
+// window객체 사용위해 컴포넌트 서버사이드렌더링 방지
+const MonthComponent = dynamic(() => import("./MonthComponent"), {
+  ssr: false,
+});
 
 const now = moment();
 // 요일 변환

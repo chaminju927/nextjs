@@ -10,29 +10,34 @@ const endTime = moment(today).endOf("day");
 
 function TimelineComponent() {
   const time = moment(today).startOf("day");
-  const [renderTime, setRenderTime] = useState<JSX.Element[]>([]);
-  useEffect(() => {
-    drawTime();
-  }, []);
 
   // 시간대 출력 (30분 단위)
-  const drawTime: voidFnType = () => {
+  const drawTime: any = useMemo(() => {
     var timeLineRow = [];
     for (time; time.isSameOrBefore(endTime); time.add(30, "minutes")) {
-      time.format("mm") === "00" ? (
-        timeLineRow.push(
-          <div key={time.format("HH:mm")} className="timeBox">
-            <span id="times">{time.format("HH:mm")}</span>
-          </div>
-        )
-      ) : (
-        <div key={time.format("HH:mm")} className="blankTime">
-          <span></span>
-        </div>
-      );
-      setRenderTime(timeLineRow);
+      time.format("mm") === "00"
+        ? timeLineRow.push(
+            <div
+              key={time.format("HH:mm")}
+              id={time.format("HH:mm")}
+              className="timeBox"
+            >
+              <span id="times">{time.format("HH:mm")}</span>
+            </div>
+          )
+        : timeLineRow.push(
+            <div
+              key={time.format("HH:mm")}
+              id={time.format("HH:mm")}
+              className="blankTime"
+            >
+              <span id="times"></span>
+            </div>
+          );
     }
-  };
-  return <div>{renderTime}</div>;
+    return timeLineRow;
+  }, [time]);
+
+  return <div>{drawTime}</div>;
 }
 export default TimelineComponent;
