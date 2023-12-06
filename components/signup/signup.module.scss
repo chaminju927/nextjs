@@ -1,0 +1,68 @@
+@charset "UTF-8";
+
+$font-stack: 'NanumGothic', sans-serif;
+$white: #fff;
+@mixin marginRL {
+  margin-left: auto;
+  margin-right: auto;
+}
+@mixin fontStyle {
+  font-size: 14px;
+  color: #808080;
+}
+
+@media screen and (min-width: 500px) {
+  .area {
+    font: $font-stack;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    height: 80%;
+    @include marginRL;
+    margin: auto;
+    background-color: $white;
+    .container {
+      border: 1px solid black;
+      align-items: center;
+      padding: 20% 5%;
+      @include marginRL;
+
+      .signup_title {
+        margin-left: 40%;
+        font-size: 25px;
+      }
+      .sub_title {
+        width: 300px;
+        font-size: 11px;
+      }
+      .area_text {
+        @include fontStyle;
+        margin-top: 20px;
+        @include marginRL;
+        padding-left: 15%;
+      }
+      .form {
+        background-color: $white;
+        margin-top: 10%;
+        .input1 {
+          height: 30px;
+          display: inline;
+        }
+      }
+
+      .nav_button_area {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .nav_check_area {
+      margin-top: 10%;
+      width: 320px !important;
+      flex-direction: column;
+      width: 320px;
+    }
+  }
+}
