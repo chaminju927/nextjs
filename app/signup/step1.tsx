@@ -1,14 +1,34 @@
-'use client';
+"use client";
 
-import InputBox from '@/components/inputBox/InputBox';
-import styles from './signup.module.scss';
-import { forwardRef, useState } from 'react';
+import InputBox from "@/components/inputBox/InputBox";
+import styles from "./signup.module.scss";
+import {
+  RefObject,
+  forwardRef,
+  useState,
+  ForwardedRef,
+  useImperativeHandle,
+  useRef,
+} from "react";
 
-const Step1 = forwardRef(({}, inputRef: React.ForwardedRef<HTMLInputElement[]>) => {
-  const [test4, setTest4] = useState<string>('');
-  const [test3, setTest3] = useState<string>('');
-  const [test2, setTest2] = useState<string>('');
-  const [test1, setTest1] = useState<string>('');
+interface Step1Ref {
+  inputRef: RefObject<HTMLInputElement>;
+}
+const Step1 = forwardRef(({}, ref: ForwardedRef<Step1Ref>) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const [test4, setTest4] = useState<string>("");
+  const [test3, setTest3] = useState<string>("");
+  const [test2, setTest2] = useState<string>("");
+  const [test1, setTest1] = useState<string>("");
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      inputRef,
+    }),
+    [inputRef]
+  );
   return (
     <div>
       <form className={styles.form}>
@@ -18,13 +38,13 @@ const Step1 = forwardRef(({}, inputRef: React.ForwardedRef<HTMLInputElement[]>) 
           placeholder="회사명을 입력해주세요"
           label="회사명*"
           maxLength={20}
-          ref={(el) => {
-            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-expect-error
-            inputRef!.current[0] = el;
-            //setTest4(e.target.value);
-          }}
-          inputStyle={{ marginRight: '10%', width: 320, fontSize: 12 }}
+          ref={inputRef} // ref={(el) => {
+          //   //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          //   //@ts-expect-error
+          //   inputRef!.current[0] = el;
+          //   //setTest4(e.target.value);
+          // }}
+          inputStyle={{ marginRight: "10%", width: 320, fontSize: 12 }}
         />
         <InputBox
           type="text"
@@ -39,7 +59,7 @@ const Step1 = forwardRef(({}, inputRef: React.ForwardedRef<HTMLInputElement[]>) 
             inputRef1!.current[1] = e.target.value;
             setTest3(e.target.value);
           }}
-          inputStyle={{ marginRight: '10%', width: 200, fontSize: 12 }}
+          inputStyle={{ marginRight: "10%", width: 200, fontSize: 12 }}
         />
         {/* <Button label="조회" /> */}
         <InputBox
@@ -55,7 +75,12 @@ const Step1 = forwardRef(({}, inputRef: React.ForwardedRef<HTMLInputElement[]>) 
             inputRef1!.current[2] = e.target.value;
             setTest2(e.target.value);
           }}
-          inputStyle={{ marginRight: '10%', width: 320, height: 20, fontSize: 12 }}
+          inputStyle={{
+            marginRight: "10%",
+            width: 320,
+            height: 20,
+            fontSize: 12,
+          }}
         />
         {/* <Button /> */}
         <InputBox
@@ -72,7 +97,7 @@ const Step1 = forwardRef(({}, inputRef: React.ForwardedRef<HTMLInputElement[]>) 
             inputRef1!.current[3] = e.target.value;
             setTest1(e.target.value);
           }}
-          inputStyle={{ marginRight: '10%', width: 320, fontSize: 12 }}
+          inputStyle={{ marginRight: "10%", width: 320, fontSize: 12 }}
         />
       </form>
     </div>

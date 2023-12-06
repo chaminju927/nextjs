@@ -1,5 +1,10 @@
-import React, { useState, forwardRef, useEffect, useImperativeHandle } from 'react';
-import styles from './inputBox.module.scss';
+import React, {
+  useState,
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+} from "react";
+import styles from "./inputBox.module.scss";
 
 type InputBoxProps = {
   type: string;
@@ -27,17 +32,17 @@ const InputBox = forwardRef(
       customStyle,
       inputStyle,
     }: InputBoxProps,
-    ref: React.ForwardedRef<HTMLInputElement>,
+    ref: React.ForwardedRef<HTMLInputElement>
   ) => {
-    const [enterValue, setEnterValue] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
+    const [enterValue, setEnterValue] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const currentValue = e.currentTarget.value;
       if (currentValue.length <= minLength) {
         setErrorMessage(`최소 ${minLength} 자리 이상 입력 해 주세요`);
       } else {
-        setErrorMessage('');
+        setErrorMessage("");
       }
       setEnterValue(currentValue);
     };
@@ -53,7 +58,7 @@ const InputBox = forwardRef(
             type={type}
             name={name}
             id={name}
-            value={enterValue}
+            value={value || enterValue}
             placeholder={placeholder}
             maxLength={maxLength}
             className={`${styles.inputbox}`}
@@ -69,7 +74,7 @@ const InputBox = forwardRef(
         )}
       </div>
     );
-  },
+  }
 );
 
 export default InputBox;

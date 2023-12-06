@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import styles from '../button/button.module.scss';
-import Image from 'next/image';
-import icon_sprite from '../../assets/icon/icon_sprite.png';
-import Icon from '../icon/icon';
+import React, { useState, useEffect } from "react";
+import styles from "../button/button.module.scss";
+import Image from "next/image";
+import icon_sprite from "../../assets/icon/icon_sprite.png";
+//import Icon from '../icon/icon';
 
 type ButtonProps = {
   label: string;
@@ -21,9 +21,9 @@ type ButtonProps = {
 const Button = ({
   label,
   onClick,
-  size = 'small',
-  fillStyle = 'outlined',
-  colorStyle = 'gray',
+  size = "small",
+  fillStyle = "outlined",
+  colorStyle = "gray",
   iconType,
   customStyle,
 }: ButtonProps) => {
@@ -31,9 +31,11 @@ const Button = ({
     <div
       style={customStyle ? customStyle : undefined}
       onClick={onClick}
-      className={`${styles.default_style} ${styles[size]} ${styles[fillStyle + '_' + colorStyle]}`}
+      className={`${styles.default_style} ${styles[size]} ${
+        styles[fillStyle + "_" + colorStyle]
+      }`}
     >
-      {iconType && <Icon iconType={iconType} />}
+      {/* {iconType && <Icon iconType={iconType} />} */}
       {label}
     </div>
   );
