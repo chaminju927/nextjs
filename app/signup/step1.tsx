@@ -4,7 +4,7 @@ import InputBox from "@/components/inputBox/InputBox";
 import styles from "./signup.module.scss";
 import { useState, useRef, useEffect, RefObject } from "react";
 
-const Step1 = (moveNext: any) => {
+const Step1 = () => {
   const companyRef = useRef<HTMLInputElement>(null);
   const businessNoRef = useRef<HTMLInputElement>(null);
   const domainRef = useRef<HTMLInputElement>(null);
