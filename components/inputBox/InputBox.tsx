@@ -18,6 +18,13 @@ type InputBoxProps = {
   customStyle?: React.CSSProperties;
   inputStyle?: React.CSSProperties;
 };
+
+interface SignUpFormState {
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
 const InputBox = forwardRef(
   (
     {
@@ -37,6 +44,12 @@ const InputBox = forwardRef(
     const [enterValue, setEnterValue] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    const [formData, setFormData] = useState<SignUpFormState>({
+      email: '',
+      password: '',
+      confirmPassword: '',
+    });
+  
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const currentValue = e.currentTarget.value;
       if (currentValue.length <= minLength) {
