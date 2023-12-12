@@ -17,7 +17,7 @@ $white: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
+    width: 60%;
     height: 80%;
     @include marginRL;
     margin: auto;
@@ -25,26 +25,58 @@ $white: #fff;
     .container {
       border: 1px solid black;
       align-items: center;
-      padding: 20% 5%;
+      padding: 20% 10%;
       @include marginRL;
 
-      .signup_title {
-        margin-left: 40%;
-        font-size: 25px;
+      .infomation {
+        background-color: #f2f4f7;
+        color: #333;
+        width: 90%;
+        margin-left: 10px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding: 10px 20px;
+
+        .title {
+          font-size: 15px;
+          font-weight: bold;
+        }
+        .text {
+          font-size: 12px;
+        }
+
+        p:not(:first-child) {
+          margin-top: 5px;
+        }
       }
-      .sub_title {
-        width: 300px;
-        font-size: 11px;
+
+      .header {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10%;
+        .signup_title {
+          font-size: 25px;
+          margin-left: 40%;
+          margin-bottom: 5%;
+        }
+        .sub_title {
+          justify-content: center;
+          width: 300px;
+          font-size: 11px;
+          margin-left: 20%;
+        }
       }
       .area_text {
         @include fontStyle;
         margin-top: 20px;
         @include marginRL;
         padding-left: 15%;
+        margin-left: 20%;
       }
       .form {
         background-color: $white;
         margin-top: 10%;
+        margin-left: 20%;
         .input1 {
           height: 30px;
           display: inline;
@@ -54,15 +86,26 @@ $white: #fff;
       .nav_button_area {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
       }
     }
     .nav_check_area {
+      margin-left: 20%;
       margin-top: 10%;
       width: 320px !important;
       flex-direction: column;
       width: 320px;
+    }
+    .select_label {
+      color: #615b5b;
+      font-size: 12px;
+      word-break: keep-all !important;
+      width: 100px;
+      margin-right: 10%;
+    }
+    .companyNo_area {
+      display: inline-flex;
     }
   }
 }
