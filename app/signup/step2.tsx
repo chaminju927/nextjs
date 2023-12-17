@@ -3,7 +3,7 @@
 import { useRef, useState, forwardRef, useCallback, useEffect, useImperativeHandle } from 'react';
 import InputBox from '@/components/inputBox/InputBox';
 import styles from './signup.module.scss';
-import SelectBox from '@/components/selectBox/selectBox';
+//import SelectBox from '@/components/selectBox/selectBox';
 
 export type optionType = {
   label: '';
@@ -78,16 +78,18 @@ const validEmail = () => {
   } 
 }
 const validPhone = () => {
-  if (!emailRegex.test(refEmail.current?.value!)) {
-    setErrorMessage({ ...errorMessage, email: '규칙에 맞는 이메일 주소를 입력해주세요.' });
+  if (!phoneRegex.test(refPhone.current?.value!)) {
+    setErrorMessage({ ...errorMessage, phone: '숫자만 사용하여 입력해주세요.' });
     return false;
-  } 
+  }
+  return true;
+};
 
 
 
-  // const validateForm = () => {
-  //   validEmail
-  // };
+  const validateForm = () => {
+    return validPhone() ? true : false;
+  };
 
   useImperativeHandle(ref, () => {
     return {
@@ -150,7 +152,7 @@ const validPhone = () => {
         inputStyle={{ width: 320 }}
         errorMessage={errorMessage.email}
       />
-      <div style={{ marginBottom: 20 }}>
+      {/* <div style={{ marginBottom: 20 }}>
         <label htmlFor="" className={styles.select_label}>
           직무/직책
         </label>
@@ -162,7 +164,7 @@ const validPhone = () => {
           ref={refTask}
         />
         <SelectBox options={titOptions} width={160} placeholder="직책 선택" ref={refPosition} />
-      </div>
+      </div> */}
 
       <InputBox
         type="text"
@@ -176,5 +178,4 @@ const validPhone = () => {
     </div>
   );
 });
-
 export default Step2;

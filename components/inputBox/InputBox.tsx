@@ -37,11 +37,6 @@ const InputBox = forwardRef(
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const currentValue = e.currentTarget.value;
-      // if (currentValue.length <= minLength) {
-      //   setLengthError(`최소 ${minLength} 자리 이상 입력 해 주세요`);
-      // } else {
-      //   setLengthError('');
-      // }
       setEnterValue(currentValue);
     };
 

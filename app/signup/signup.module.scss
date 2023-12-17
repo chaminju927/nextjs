@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import '../../app/global-css/variable';
+//@import '../../app/global-css/variable';
 
 $white: #fff;
 @mixin marginRL {
@@ -13,7 +13,7 @@ $white: #fff;
 
 @media screen and (min-width: 500px) {
   .area {
-    font: $font-stack;
+   // font: $font-stack;
     display: flex;
     justify-content: center;
     align-items: center;
