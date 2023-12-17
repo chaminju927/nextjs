@@ -1,6 +1,6 @@
 @charset "UTF-8";
+@import '../../app/global-css/variable';
 
-$font-stack: 'NanumGothic', sans-serif;
 $white: #fff;
 @mixin marginRL {
   margin-left: auto;
@@ -17,70 +17,46 @@ $white: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    height: 80%;
+    width: 880px;
     @include marginRL;
-    margin: auto;
+    padding: 30px 100px 60px 100px !important;
     background-color: $white;
     .container {
-      border: 1px solid black;
+      width: 680px !important;
       align-items: center;
-      padding: 20% 10%;
-      @include marginRL;
-
-      .infomation {
-        background-color: #f2f4f7;
-        color: #333;
-        width: 90%;
-        margin-left: 10px;
-        margin-top: 40px;
-        margin-bottom: 40px;
-        padding: 10px 20px;
-
-        .title {
-          font-size: 15px;
-          font-weight: bold;
-        }
-        .text {
-          font-size: 12px;
-        }
-
-        p:not(:first-child) {
-          margin-top: 5px;
-        }
+      //  @include marginRL;
+      .logo {
+        height: 40px;
+        margin-top: 30px;
       }
-
       .header {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 10%;
+        margin: 0 auto;
         .signup_title {
-          font-size: 25px;
-          margin-left: 40%;
-          margin-bottom: 5%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          box-sizing: content-box;
+          font: bold 30px #000000;
+          height: 70px !important;
+          // border: 1px solid black;
         }
         .sub_title {
+          display: flex;
+          box-sizing: content-box;
+          height: 60px;
+          // border: 1px solid black;
           justify-content: center;
-          width: 300px;
-          font-size: 11px;
-          margin-left: 20%;
+          align-items: center;
+          font-size: 13px;
         }
       }
       .area_text {
-        @include fontStyle;
-        margin-top: 20px;
-        @include marginRL;
-        padding-left: 15%;
-        margin-left: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      .form {
-        background-color: $white;
-        margin-top: 10%;
-        margin-left: 20%;
-        .input1 {
-          height: 30px;
-          display: inline;
-        }
+      .companyNo_area {
+        display: inline-flex;
       }
 
       .nav_button_area {
@@ -88,14 +64,15 @@ $white: #fff;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        margin-top: 30px;
       }
     }
     .nav_check_area {
-      margin-left: 20%;
-      margin-top: 10%;
       width: 320px !important;
       flex-direction: column;
+      margin-left: 220px;
       width: 320px;
+      // border: 1px solid black;
     }
     .select_label {
       color: #615b5b;
@@ -104,8 +81,6 @@ $white: #fff;
       width: 100px;
       margin-right: 10%;
     }
-    .companyNo_area {
-      display: inline-flex;
-    }
   }
 }
+

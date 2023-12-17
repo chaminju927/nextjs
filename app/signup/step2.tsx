@@ -19,19 +19,23 @@ const titOptions = [
   { label: '직책2', value: 'TIT0002' },
 ];
 export type Step2InputValueTypes = {
-  manager: string;
-  workerNo: string;
-  email: string;
-  task: string;
-  position: string;
-  phone: string;
+  manager?: string;
+  workerNo?: string;
+  email?: string;
+  task?: string;
+  position?: string;
+  phone?: string;
 };
 type Step2Props = {
   validation: boolean;
 };
+
 export type Step2InputHandle = {
   getData: () => Step2InputValueTypes;
 };
+const lengthRegex = /^.{2,20}$/; //모든 글자 2글자이상 20글자 이하
+//var pr = /^[0-9]{4,}$/      //숫자 4글자 이상
+
 
 const managerRegex = /^[가-힣]{2,8}$/;
 const workerNoRegex = /^[0-9]{2,10}$/;
@@ -54,6 +58,36 @@ const Step2 = forwardRef<Step2InputHandle, Step2Props>((props: Step2Props, ref):
     position: '',
     phone: '',
   });
+
+const validManager = () => {
+  if (!managerRegex.test(refManager.current?.value!)) {
+    setErrorMessage({ ...errorMessage, manager: '한글만 사용하여 입력해주세요.' });
+    return false;
+  } 
+}
+const validWorkerNo = () => {
+  if (!workerNoRegex.test(refWorkerNo.current?.value!)) {
+    setErrorMessage({ ...errorMessage, workerNo: '숫자만 사용하여 입력해주세요.' });
+    return false;
+  } 
+}
+const validEmail = () => {
+  if (!emailRegex.test(refEmail.current?.value!)) {
+    setErrorMessage({ ...errorMessage, email: '규칙에 맞는 이메일 주소를 입력해주세요.' });
+    return false;
+  } 
+}
+const validPhone = () => {
+  if (!emailRegex.test(refEmail.current?.value!)) {
+    setErrorMessage({ ...errorMessage, email: '규칙에 맞는 이메일 주소를 입력해주세요.' });
+    return false;
+  } 
+
+
+
+  // const validateForm = () => {
+  //   validEmail
+  // };
 
   useImperativeHandle(ref, () => {
     return {
@@ -84,79 +118,61 @@ const Step2 = forwardRef<Step2InputHandle, Step2Props>((props: Step2Props, ref):
     };
   });
 
-  const validateForm = () => {
-    if (!managerRegex.test(refManager.current?.value!)) {
-      setErrorMessage({ ...errorMessage, manager: '한글만 사용하여 입력해주세요.' });
-      return false;
-    } else if (!workerNoRegex.test(refWorkerNo.current?.value!)) {
-      setErrorMessage({ ...errorMessage, workerNo: '숫자만 사용하여 입력해주세요.' });
-      return false;
-    } else if (!emailRegex.test(refEmail.current?.value!)) {
-      setErrorMessage({ ...errorMessage, email: '규칙에 맞는 이메일 주소를 입력해주세요.' });
-      return false;
-    } else if (!phoneRegex.test(refPhone.current?.value!)) {
-      setErrorMessage({ ...errorMessage, phone: '규칙에 맞는 전화번호를 입력해주세요.' });
-      return false;
-    } else {
-      return true;
-    }
-  };
   return (
-    <div>
-      <form className={styles.form}>
-        <InputBox
-          type="text"
-          name="manager"
-          placeholder="이름을 입력해주세요"
-          label="담당자 이름*"
-          maxLength={20}
-          ref={refManager}
-          inputStyle={{ marginRight: '10%', width: 320, fontSize: 12 }}
-          errors={errorMessage.manager}
+    <div style={{ marginLeft: 120, marginTop: 30 }}>
+      <InputBox
+        type="text"
+        name="manager"
+        placeholder="이름을 입력해주세요"
+        label="담당자 이름"
+        isImportant
+        ref={refManager}
+        inputStyle={{ width: 320 }}
+        errorMessage={errorMessage.manager}
+      />
+      <InputBox
+        type="text"
+        name="workerNo"
+        placeholder="아이디(사번)를 입력해주세요.(Pine Work와 공용 사용)"
+        label="아이디(사번)"
+        isImportant
+        ref={refWorkerNo}
+        inputStyle={{ width: 320 }}
+        errorMessage={errorMessage.workerNo}
+      />
+      <InputBox
+        type="text"
+        name="email"
+        placeholder="이메일을 입력해주세요."
+        label="이메일"
+        isImportant
+        ref={refEmail}
+        inputStyle={{ width: 320 }}
+        errorMessage={errorMessage.email}
+      />
+      <div style={{ marginBottom: 20 }}>
+        <label htmlFor="" className={styles.select_label}>
+          직무/직책
+        </label>
+        <SelectBox
+          options={posOptions}
+          width={160}
+          customStyle={{ marginRight: 10 }}
+          placeholder="직무 선택"
+          ref={refTask}
         />
-        <InputBox
-          type="text"
-          name="workerNo"
-          placeholder="아이디(사번)를 입력해주세요.(Pine Work와 공용으로 사용됩니다.)
-          "
-          label="아이디(사번)*"
-          maxLength={20}
-          ref={refWorkerNo}
-          inputStyle={{ marginRight: '10%', width: 320, fontSize: 12 }}
-          errors={errorMessage.workerNo}
-        />
-        <InputBox
-          type="text"
-          name="email"
-          placeholder="이메일을 입력해주세요.
-          "
-          label="이메일*"
-          maxLength={20}
-          ref={refEmail}
-          inputStyle={{ marginRight: '10%', width: 320, height: 20, fontSize: 12 }}
-          errors={errorMessage.email}
-        />
-        <div style={{ marginRight: '10%' }}>
-          <label htmlFor="" className={styles.select_label}>
-            직무/직책
-          </label>
-          <SelectBox options={posOptions} width={100} placeholder="직무 선택" ref={refTask} />
-          <SelectBox options={titOptions} width={100} placeholder="직책 선택" ref={refPosition} />
-        </div>
+        <SelectBox options={titOptions} width={160} placeholder="직책 선택" ref={refPosition} />
+      </div>
 
-        <InputBox
-          type="text"
-          name="phone"
-          placeholder="전화번호(-제외)를 입력해주세요.
-          "
-          label="전화번호"
-          maxLength={20}
-          minLength={2}
-          ref={refPhone}
-          inputStyle={{ marginRight: '10%', width: 320, fontSize: 12, marginTop: 10 }}
-          errors={errorMessage.phone}
-        />
-      </form>
+      <InputBox
+        type="text"
+        name="phone"
+        placeholder="전화번호(-제외)를 입력해주세요."
+        label="전화번호"
+        ref={refPhone}
+        inputStyle={{ width: 320 }}
+        errorMessage={errorMessage.phone}
+      />
     </div>
   );
 });
